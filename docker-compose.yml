@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  database:
+    image: postgres:13
+    container_name: ecbackend-database
+    environment:
+      POSTGRES_DB: ${PGR_DB}
+      POSTGRES_USER: ${PGR_USER}
+      POSTGRES_PASSWORD: ${PGR_PASSWORD}
+    ports:
+      - ${PGR_PORT}:5432
+    volumes:
+      - ${DOCKER_DATA_FOLDER}/postgres:/var/lib/postgresql/data
+    networks:
+      - postgres-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - ${PGADMIN_PORT}:80
+    depends_on:
+      - database
+    networks:
+      - postgres-network
+
+networks:
+  postgres-network:
+    driver: bridge
