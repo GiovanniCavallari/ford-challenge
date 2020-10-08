@@ -3,7 +3,7 @@ version: "3.7"
 services:
   database:
     image: postgres:13
-    container_name: ecbackend-database
+    container_name: fordva-database
     environment:
       POSTGRES_DB: ${PGR_DB}
       POSTGRES_USER: ${PGR_USER}
