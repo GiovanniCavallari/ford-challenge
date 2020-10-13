@@ -4,12 +4,12 @@ import { Container, IconContainer, Info, Value, Unit, Name } from './styled';
 
 interface Props {
   name: string;
-  unit?: string;
+  unit: string | null;
   value: number | boolean;
   icon: JSX.Element;
   onPress: () => void;
   configValue: string;
-  direction: string;
+  direction: string | null;
 }
 
 const SensorInfo: React.FC<Props> = ({ name, unit, value, icon, onPress, configValue, direction }) => {

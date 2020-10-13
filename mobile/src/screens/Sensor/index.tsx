@@ -43,6 +43,8 @@ const Sensor: React.FC = () => {
     value: 0,
     configurations: {
       id: 0,
+      max: 0,
+      min: 0,
       name: '',
       type: '',
       unit: '',
@@ -50,8 +52,6 @@ const Sensor: React.FC = () => {
       message: '',
       active: true,
       direction: null,
-      max: null,
-      min: null,
     },
   });
 
