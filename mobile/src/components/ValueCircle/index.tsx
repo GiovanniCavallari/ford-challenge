@@ -7,11 +7,11 @@ import { Container, ContainerValue, ContainerMessage, Message } from './styled';
 
 interface Props {
   value: number | boolean;
-  unit: string;
+  unit: string | null;
   message: string;
   type: string;
   configValue: string;
-  direction: string;
+  direction: string | null;
 }
 
 const ValueCircle: React.FC<Props> = ({ value, unit, message, type, configValue, direction }) => {

@@ -28,12 +28,20 @@ module.exports = {
         type: Sequelize.STRING,
       },
       unit: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING,
       },
       direction: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING,
+      },
+      min: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+      },
+      max: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

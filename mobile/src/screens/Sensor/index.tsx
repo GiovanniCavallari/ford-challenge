@@ -49,6 +49,9 @@ const Sensor: React.FC = () => {
       value: '',
       message: '',
       active: true,
+      direction: null,
+      max: null,
+      min: null,
     },
   });
 
@@ -140,7 +143,12 @@ const Sensor: React.FC = () => {
                       {sliderValue} {sensor.configurations.unit}
                     </AlertText>
                   </AlertConfiguration>
-                  <Slider onValueChange={handleSlider} minimumValue={0} maximumValue={100} value={sliderValue} />
+                  <Slider
+                    onValueChange={handleSlider}
+                    minimumValue={sensor.configurations.min}
+                    maximumValue={sensor.configurations.max}
+                    value={sliderValue}
+                  />
                   <Divider marginTop={false} />
                 </>
               )}

@@ -8,7 +8,9 @@ export interface ISensor {
     value: string;
     type: string;
     message: string;
-    unit: string;
-    direction: string;
+    unit: string | null;
+    direction: string | null;
+    min: number;
+    max: number;
   };
 }

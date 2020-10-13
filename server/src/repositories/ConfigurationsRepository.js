@@ -3,7 +3,7 @@ import { Configuration } from '../models';
 async function getConfigurationByName(name, chassis) {
   try {
     const configuration = await Configuration.findOne({
-      attributes: ['id', 'name', 'active', 'value', 'type', 'message', 'unit', 'direction'],
+      attributes: ['id', 'name', 'active', 'value', 'type', 'message', 'unit', 'direction', 'min', 'max'],
       where: { name, carChassis: chassis },
     });
     return configuration;
