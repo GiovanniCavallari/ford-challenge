@@ -9,7 +9,8 @@ export default {
       largest: 22,
       huge: 32,
       sensorUnit: 24,
-      sensorValue: 56,
+      sensorValue: 52,
+      sensorMessage: 32,
       buttonText: 16,
     },
     weight: {

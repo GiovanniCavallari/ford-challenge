@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     unit: {
       type: DataTypes.STRING,
     },
+    direction: {
+      type: DataTypes.STRING,
+    },
     carChassis: {
       type: DataTypes.INTEGER,
     },

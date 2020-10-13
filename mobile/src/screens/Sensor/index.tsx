@@ -5,7 +5,7 @@ import { showAlert } from '../../common/showAlert';
 import { firstCapitalLetter } from '../../common/helpers';
 
 import Header from '../../components/Header';
-import SensorValue from '../../components/SensorValue';
+import ValueCircle from '../../components/ValueCircle';
 
 import theme from '../../assets/styles/theme';
 
@@ -15,7 +15,6 @@ import {
   Heading,
   Info,
   ValueCircleContainer,
-  ValueCircle,
   Name,
   Main,
   ConfigurationsContainer,
@@ -81,8 +80,8 @@ const Sensor: React.FC = () => {
 
   const handleSubmit = async () => {
     const data = {
-      active: isEnabled,
       value: sliderValue,
+      active: isEnabled,
     };
 
     try {
@@ -103,9 +102,14 @@ const Sensor: React.FC = () => {
 
           <Info>
             <ValueCircleContainer>
-              <ValueCircle>
-                <SensorValue value={sensor.value} unit={sensor.configurations.unit} />
-              </ValueCircle>
+              <ValueCircle
+                value={sensor.value}
+                unit={sensor.configurations.unit}
+                type={sensor.configurations.type}
+                message={sensor.configurations.message}
+                configValue={sensor.configurations.value}
+                direction={sensor.configurations.direction}
+              />
             </ValueCircleContainer>
 
             <Name>{firstCapitalLetter(sensor.name)}</Name>
@@ -136,9 +140,7 @@ const Sensor: React.FC = () => {
                       {sliderValue} {sensor.configurations.unit}
                     </AlertText>
                   </AlertConfiguration>
-
                   <Slider onValueChange={handleSlider} minimumValue={0} maximumValue={100} value={sliderValue} />
-
                   <Divider marginTop={false} />
                 </>
               )}

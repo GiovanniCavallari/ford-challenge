@@ -17,11 +17,11 @@ export const Container = styled.TouchableOpacity`
   justify-content: flex-end;
 `;
 
-export const IconContainer = styled.View`
+export const IconContainer = styled.View<{error: boolean}>`
   width: 48px;
   height: 48px;
   border-radius: 24px;
-  background: ${theme.colors.mediumblue};
+  background: ${props => props.error ? theme.colors.error : theme.colors.mediumblue};
 
   align-items: center;
   justify-content: center;
@@ -33,15 +33,15 @@ export const Info = styled.View`
   align-items: flex-end;
 `;
 
-export const Value = styled.Text<{ error?: boolean }>`
+export const Value = styled.Text<{ error: boolean }>`
   color: ${props => props.error ? theme.colors.error : theme.colors.black};
   font-family: ${theme.font.weight.bold};
   font-size: ${theme.font.size.huge}px;
   line-height: 37px;
 `;
 
-export const Unit = styled.Text`
-  color: ${theme.colors.black};
+export const Unit = styled.Text<{ error: boolean }>`
+  color: ${props => props.error ? theme.colors.error : theme.colors.black};
   font-family: ${theme.font.weight.bold};
   font-size: ${theme.font.size.large}px;
   line-height: 32px;

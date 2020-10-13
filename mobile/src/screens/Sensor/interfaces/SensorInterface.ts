@@ -9,5 +9,6 @@ export interface ISensor {
     type: string;
     message: string;
     unit: string;
+    direction: string;
   };
 }

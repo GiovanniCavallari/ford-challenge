@@ -34,19 +34,6 @@ export const ValueCircleContainer = styled.View`
   justify-content: center;
 `;
 
-export const ValueCircle = styled.View`
-  width: 250px;
-  height: 250px;
-  background: ${theme.colors.white};
-  border: 5px solid ${theme.colors.primary};
-  border-radius: 125px;
-
-  top: -50px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
-
 export const Name = styled.Text`
   color: ${theme.colors.black};
   font-size: ${theme.font.size.largest}px;

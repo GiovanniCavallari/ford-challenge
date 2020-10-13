@@ -6,7 +6,6 @@ import theme from '../../assets/styles/theme';
 const valueCSS = css`
   font-size: ${theme.font.size.sensorValue}px;
   font-family: ${theme.font.weight.bold};
-  line-height: 66px;
 `;
 
 export const NumberValue = styled(AnimatedNumber)`

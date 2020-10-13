@@ -88,8 +88,9 @@ const Car: React.FC = () => {
               value={sensor.value}
               unit={sensor.configurations?.unit}
               icon={SensorsIcons[sensor.name]}
-              message={sensor.configurations?.message}
               onPress={() => handleCarToSensor(sensor.name)}
+              direction={sensor.configurations.direction}
+              configValue={sensor.configurations.value}
             />
           ))}
         </Main>
