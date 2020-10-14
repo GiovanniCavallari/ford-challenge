@@ -23,7 +23,7 @@ jobs:
     - name: npm install and build
       run: |
         cd server/
-        npm install
+        npm install --no-optional
         npm run start
 
     - name: 'Deploy to Azure Web App'
