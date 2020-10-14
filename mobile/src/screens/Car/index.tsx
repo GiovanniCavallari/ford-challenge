@@ -51,7 +51,7 @@ const Car: React.FC = () => {
   useFocusEffect(
     useCallback(() => {
       getCar();
-    }, [])
+    }, []),
   );
 
   const navigation = useNavigation();
@@ -83,18 +83,21 @@ const Car: React.FC = () => {
         </Header>
 
         <Main>
-          {car.sensors.map((sensor: ISensor) => (
-            <SensorInfo
-              key={sensor.name}
-              name={firstCapitalLetter(sensor.name)}
-              value={sensor.value}
-              unit={sensor.configurations.unit}
-              icon={SensorsIcons[sensor.name]}
-              onPress={() => handleCarToSensor(sensor.name)}
-              direction={sensor.configurations.direction}
-              configValue={sensor.configurations.value}
-            />
-          ))}
+          {car.sensors.map((sensor: ISensor) => {
+            const sensorName = firstCapitalLetter(sensor.name);
+            return (
+              <SensorInfo
+                key={sensor.name}
+                name={sensorName}
+                value={sensor.value}
+                unit={sensor.configurations.unit}
+                icon={sensorName.includes('tire') ? SensorsIcons['tire'] : SensorsIcons[sensor.name]}
+                onPress={() => handleCarToSensor(sensor.name)}
+                direction={sensor.configurations.direction}
+                configValue={sensor.configurations.value}
+              />
+            );
+          })}
         </Main>
       </Container>
     </Wrapper>
