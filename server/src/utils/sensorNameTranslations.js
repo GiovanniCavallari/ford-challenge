@@ -1,0 +1,15 @@
+export const sensorNameTranslations = {
+  fuel: 'Combustível',
+  odometer: 'Odômetro',
+  oil: 'Nível do óleo',
+  brake: 'Pastilhas de freio',
+  temperature: 'Temperatura',
+  rfTirePressure: 'Pressão pneu DD',
+  lfTirePressure: 'Pressão pneu DE',
+  rrTirePressure: 'Pressão pneu TD',
+  rlTirePressure: 'Pressão pneu TE',
+  rfTireTemp: 'Temp. pneu DD',
+  lfTireTemp: 'Temp. pneu DE',
+  rrTireTemp: 'Temp. pneu TD',
+  rlTireTemp: 'Temp. pneu TE',
+};
