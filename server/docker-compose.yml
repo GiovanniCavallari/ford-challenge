@@ -5,23 +5,23 @@ services:
     image: postgres:13
     container_name: fordva-database
     environment:
-      POSTGRES_DB: ${APPLICATION_PGR_DB}
-      POSTGRES_USER: ${APPLICATION_PGR_USER}
-      POSTGRES_PASSWORD: ${APPLICATION_PGR_PASSWORD}
+      POSTGRES_DB: ${APPSETTING_PGR_DB}
+      POSTGRES_USER: ${APPSETTING_PGR_USER}
+      POSTGRES_PASSWORD: ${APPSETTING_PGR_PASSWORD}
     ports:
-      - ${APPLICATION_PGR_PORT}:5432
+      - ${APPSETTING_PGR_PORT}:5432
     volumes:
-      - ${APPLICATION_DOCKER_DATA_FOLDER}/postgres:/var/lib/postgresql/data
+      - ${APPSETTING_DOCKER_DATA_FOLDER}/postgres:/var/lib/postgresql/data
     networks:
       - postgres-network
 
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      APPLICATION_PGADMIN_DEFAULT_EMAIL: ${APPLICATION_PGADMIN_DEFAULT_EMAIL}
-      APPLICATION_PGADMIN_DEFAULT_PASSWORD: ${APPLICATION_PGADMIN_DEFAULT_PASSWORD}
+      APPSETTING_PGADMIN_DEFAULT_EMAIL: ${APPSETTING_PGADMIN_DEFAULT_EMAIL}
+      APPSETTING_PGADMIN_DEFAULT_PASSWORD: ${APPSETTING_PGADMIN_DEFAULT_PASSWORD}
     ports:
-      - ${APPLICATION_PGADMIN_PORT}:80
+      - ${APPSETTING_PGADMIN_PORT}:80
     depends_on:
       - database
     networks:
