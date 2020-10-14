@@ -11,13 +11,6 @@ speech_rate = engine.getProperty('rate') #pegando a propriedade 'rate'
 engine.setProperty('rate', speech_rate+63) #aumenta em +65
 #Taxa de fala em palavras por minuto. O padrão é 200 palavras por minuto.
 
-# def prep_ouvir():
-#       #  r.adjust_for_ambient_noise(s, duration = 0.5)
-#     audio = r.listen(s, 3, 7)     
-#     speech = r.recognize_google(audio, language= 'pt')
-#     return speech
-
-
 def combustivel(fala):
     # - Checar na API nivel do combustivel
     engine.say('Há ' +porcento_combustivel+' porcento do tanque de combustível. Deseja verificar mais alguma coisa?')
@@ -62,7 +55,7 @@ def freio(fala):
         return speech
 
 
-oi = 'Oi, sou a Fordina!. Como posso ajudar?'
+oi = 'Oi, sou a Fordina! Como posso ajudar?'
 porcento_combustivel = '80'
 nivelOleo = 'OK'
 
