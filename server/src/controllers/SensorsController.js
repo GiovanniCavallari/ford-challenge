@@ -3,6 +3,7 @@ import ConfigurationsRepository from '../repositories/ConfigurationsRepository';
 import errorResponse from '../utils/errorResponse';
 import getSensorsWithConfigs from '../services/GetSensorsWithConfigs';
 import { validateSensorName } from '../utils/validateSensor';
+import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 
 async function index(request, response) {
   const { chassis } = request.params;
@@ -30,7 +31,12 @@ async function show(request, response) {
   const sensor = await SensorsRepository.getSensorsByName(name, chassis);
   const configurations = await ConfigurationsRepository.getConfigurationByName(name, chassis);
 
-  return response.json({ name, value: sensor[name], configurations });
+  return response.json({
+    name,
+    translation: sensorNameTranslations[name],
+    value: sensor[name],
+    configurations,
+  });
 }
 
 export default { index, show };

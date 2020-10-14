@@ -1,4 +1,5 @@
 import ConfigurationsRepository from '../repositories/ConfigurationsRepository';
+import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 
 async function getSensorsWithConfigs(chassis, sensors) {
   const carSensors = [];
@@ -8,6 +9,7 @@ async function getSensorsWithConfigs(chassis, sensors) {
       const sensorWithConfigs = ConfigurationsRepository.getConfigurationByName(name, chassis).then((resolve) => {
         return {
           name,
+          translation: sensorNameTranslations[name],
           value: sensor[name],
           configurations: resolve,
         };

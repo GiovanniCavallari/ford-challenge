@@ -4,7 +4,7 @@ import { NumberValue, BooleanValue, Unit } from './styled';
 
 interface Props {
   value: number | boolean;
-  unit: string;
+  unit: string | null;
 }
 
 const SensorValue: React.FC<Props> = ({ value, unit }) => {

@@ -40,6 +40,7 @@ const Sensor: React.FC = () => {
   const [sliderValue, setSliderValue] = useState(0);
   const [sensor, setSensor] = useState<ISensor>({
     name: '',
+    translation: '',
     value: 0,
     configurations: {
       id: 0,
@@ -116,7 +117,7 @@ const Sensor: React.FC = () => {
               />
             </ValueCircleContainer>
 
-            <Name>{firstCapitalLetter(sensor.name)}</Name>
+            <Name>{sensor.translation}</Name>
           </Info>
 
           <ConfigurationsContainer>

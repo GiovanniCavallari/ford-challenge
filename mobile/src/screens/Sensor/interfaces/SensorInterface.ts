@@ -1,5 +1,6 @@
 export interface ISensor {
   name: string;
+  translation: string;
   value: number | boolean;
   configurations: {
     id: number;
