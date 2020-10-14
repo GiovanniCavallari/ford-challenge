@@ -22,9 +22,9 @@ jobs:
 
     - name: npm install and build
       run: |
-        cd server/
         npm install --no-optional
         npm run start
+      working-directory: server/
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
