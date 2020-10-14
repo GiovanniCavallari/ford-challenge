@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { firstCapitalLetter } from '../../common/helpers';
 import { SensorsIcons } from '../../assets/styles/icons';
 import { ISensor } from '../Sensor/interfaces/SensorInterface';
@@ -48,9 +48,11 @@ const Car: React.FC = () => {
     });
   }, []);
 
-  useEffect(() => {
-    getCar();
-  }, [getCar]);
+  useFocusEffect(
+    useCallback(() => {
+      getCar();
+    }, [])
+  );
 
   const navigation = useNavigation();
 

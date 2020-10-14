@@ -90,6 +90,7 @@ const Sensor: React.FC = () => {
     try {
       await api.patch(`/configurations/${sensor.configurations.id}`, data);
       showAlert('Configurações salvas', 'As configurações para a assistente virtual foram salvas com sucesso!');
+      getSensor();
       scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
     } catch (e) {
       showAlert('Ops', 'Ocorreu um erro ao tentar salvar as configurações. Tente novamente...');
