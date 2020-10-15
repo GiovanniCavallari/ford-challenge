@@ -1,28 +1,21 @@
 require('dotenv').config();
+const config = require('./server');
 
 module.exports = {
   development: {
-    host: process.env.PGR_HOST,
-    port: process.env.PGR_PORT,
-    username: process.env.PGR_USER,
-    password: process.env.PGR_PASSWORD,
-    database: process.env.PGR_DB,
-    dialect: 'postgres',
-  },
-  test: {
-    host: process.env.PGR_HOST,
-    port: process.env.PGR_PORT,
-    username: process.env.PGR_USER,
-    password: process.env.PGR_PASSWORD,
-    database: process.env.PGR_DB,
-    dialect: 'postgres',
+    host: config.development.database.pgrHost,
+    port: config.development.database.pgrPort,
+    username: config.development.database.pgrUser,
+    password: config.development.database.pgrPassword,
+    database: config.development.database.pgrDb,
+    dialect: config.development.database.dialect,
   },
   production: {
-    host: process.env.PGR_HOST,
-    port: process.env.PGR_PORT,
-    username: process.env.PGR_USER,
-    password: process.env.PGR_PASSWORD,
-    database: process.env.PGR_DB,
-    dialect: 'postgres',
+    host: config.production.database.pgrHost,
+    port: config.production.database.pgrPort,
+    username: config.production.database.pgrUser,
+    password: config.production.database.pgrPassword,
+    database: config.production.database.pgrDb,
+    dialect: config.production.database.dialect,
   },
 };

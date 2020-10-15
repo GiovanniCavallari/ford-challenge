@@ -1,11 +1,16 @@
+import 'dotenv/config';
+import config from './server';
+
+const serverConfig = config[process.env.NODE_ENV];
+
 export default {
   swaggerDefinition: {
     info: {
       title: 'Ford AV API',
       description: 'API developed for the Ford Challenge in partnership with FIAP',
-      version: `${process.env.API_VERSION}`,
-      servers: [`${process.env.SERVER_URL}:${process.env.SERVER_PORT}`],
-      basePath: '/api',
+      version: `${serverConfig.apiVersion}`,
+      servers: [`${serverConfig.url}:${serverConfig.port}`],
+      basePath: '/',
     },
   },
   apis: ['src/routes.js'],
