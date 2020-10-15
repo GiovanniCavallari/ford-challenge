@@ -23,12 +23,13 @@ jobs:
     - name: npm install and build
       run: |
         npm install --no-optional
+        npm run build --if-present
       working-directory: server/
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'fordva'
+        app-name: 'fordva-server'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_3d111be964b545b59711688ecf995a15 }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: .
