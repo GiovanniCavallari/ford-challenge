@@ -13,7 +13,7 @@ import AlertsController from './controllers/AlertsController';
 const routes = Router();
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-routes.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+routes.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 /**
  * @swagger
