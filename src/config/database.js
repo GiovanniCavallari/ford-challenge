@@ -18,8 +18,10 @@ module.exports = {
     database: config.production.database.pgrDb,
     dialect: config.production.database.dialect,
     dialectOptions: {
-      ssl: true,
-      rejectUnauthorized: false,
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
     },
   },
 };
