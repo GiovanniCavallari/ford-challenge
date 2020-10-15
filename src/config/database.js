@@ -17,5 +17,8 @@ module.exports = {
     password: config.production.database.pgrPassword,
     database: config.production.database.pgrDb,
     dialect: config.production.database.dialect,
+    dialectOptions: {
+      ssl: true,
+    },
   },
 };
