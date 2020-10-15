@@ -19,6 +19,7 @@ module.exports = {
     dialect: config.production.database.dialect,
     dialectOptions: {
       ssl: true,
+      rejectUnauthorized: false,
     },
   },
 };
