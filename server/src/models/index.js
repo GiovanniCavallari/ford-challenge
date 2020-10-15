@@ -1,13 +1,17 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
+const pg = require('pg');
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/database.js')[env];
 
-const db = {};
+if (env === 'production') {
+  pg.defaults.ssl = true;
+}
 
+const db = {};
 let sequelize;
 
 if (config.use_env_variable) {
