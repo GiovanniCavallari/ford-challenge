@@ -13,7 +13,11 @@ import AlertsController from './controllers/AlertsController';
 const routes = Router();
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-routes.get('/', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+routes.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+routes.get('/', (request, response) => {
+  return response.send('Ford Challenge');
+});
 
 /**
  * @swagger
