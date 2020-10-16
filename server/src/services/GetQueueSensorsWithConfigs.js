@@ -16,6 +16,7 @@ async function getQueueSensorsWithConfigs() {
               translation: sensorNameTranslations[name],
               value: sensor[name],
               configurations: resolve,
+              carChassis: sensor.carChassis,
             };
           },
         );

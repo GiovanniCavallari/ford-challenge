@@ -11,6 +11,7 @@ async function producer() {
       translation: sensor.translation,
       error: false,
       message: 'No error',
+      carChassis: sensor.carChassis,
       configurations: {
         unit: sensor.configurations.unit,
         value: sensor.configurations.value,
