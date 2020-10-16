@@ -131,6 +131,46 @@ routes.get('/cars/:chassis/alerts', AlertsController.index);
 
 /**
  * @swagger
+ * /cars/{chassis}/alerts:
+ *  post:
+ *    tags:
+ *      - Alerts
+ *    description: Create alert
+ *    consumes:
+ *      - application/json
+ *    parameters:
+ *       - name: chassis
+ *         description: Chassis to identify car
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: body
+ *         description: Request body
+ *         in: body
+ *         schema:
+ *           type: object
+ *           properties:
+ *             type:
+ *               type: string
+ *             description:
+ *               type: string
+ *         required:
+ *           - type
+ *           - description
+ *    responses:
+ *      '201':
+ *        description: Successful response
+ *      '400':
+ *        description: Invalid type for "type" or "description"
+ *      '404':
+ *        description: Car not found
+ *      '500':
+ *        description: Internal Server Error
+ */
+routes.post('/cars/:chassis/alerts', AlertsController.create);
+
+/**
+ * @swagger
  * /configurations/{id}:
  *  patch:
  *    tags:

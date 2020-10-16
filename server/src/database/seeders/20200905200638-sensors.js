@@ -4,7 +4,6 @@ module.exports = {
       'Sensors',
       [
         {
-          id: 1,
           fuel: 80,
           odometer: 84500,
           oil: true,

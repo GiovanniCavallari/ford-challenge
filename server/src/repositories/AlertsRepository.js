@@ -24,4 +24,14 @@ async function getAlertsByCarChassis(chassis) {
   }
 }
 
-export default { getAlertsByCarChassis };
+async function createAlert(data) {
+  try {
+    const result = await Alert.create(data);
+    return result;
+  } catch (error) {
+    console.log('Error', error);
+    return false;
+  }
+}
+
+export default { getAlertsByCarChassis, createAlert };
