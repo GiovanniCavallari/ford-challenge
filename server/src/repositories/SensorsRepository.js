@@ -17,9 +17,35 @@ async function getSensorsByCarChassis(chassis) {
         'lfTireTemp',
         'rrTireTemp',
         'rlTireTemp',
-        'carChassis',
       ],
       where: { carChassis: chassis },
+      limit: 1,
+    });
+    return sensors;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function getAllSensors() {
+  try {
+    const sensors = await Sensor.findAll({
+      attributes: [
+        'fuel',
+        'odometer',
+        'oil',
+        'brake',
+        'temperature',
+        'rfTirePressure',
+        'lfTirePressure',
+        'rrTirePressure',
+        'rlTirePressure',
+        'rfTireTemp',
+        'lfTireTemp',
+        'rrTireTemp',
+        'rlTireTemp',
+        'carChassis',
+      ],
       limit: 1,
     });
     return sensors;
@@ -40,4 +66,8 @@ async function getSensorsByName(name, chassis) {
   }
 }
 
-export default { getSensorsByCarChassis, getSensorsByName };
+export default {
+  getSensorsByCarChassis,
+  getAllSensors,
+  getSensorsByName,
+};

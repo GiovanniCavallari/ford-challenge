@@ -9,21 +9,14 @@ const {
 const queue = 'messages';
 const connection = connect(`amqp://${rabbitmqDefaultUser}:${rabbitmqDefaultPass}@${rabbitmqHost}`);
 
-const message = {
-  name: 'giovanni',
-  email: 'email@email.com',
-};
-
-const add = () => {
+const add = (message) => {
   connection
     .then((conn) => {
-      console.log('Conectado');
       return conn.createChannel();
     })
     .then((ch) => {
-      console.log('Canal criado');
       console.log('Enviando mensagem');
-      ch.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
+      ch.sendToQueue(queue, Buffer.from(message));
     })
     .catch(console.warn);
 };
