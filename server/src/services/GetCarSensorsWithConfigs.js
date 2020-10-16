@@ -1,7 +1,7 @@
 import ConfigurationsRepository from '../repositories/ConfigurationsRepository';
 import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 
-async function getSensorsWithConfigs(chassis, sensors) {
+async function getCarSensorsWithConfigs(chassis, sensors) {
   const carSensors = [];
 
   for (const sensor of sensors) {
@@ -22,4 +22,4 @@ async function getSensorsWithConfigs(chassis, sensors) {
   return Promise.all(carSensors);
 }
 
-export default getSensorsWithConfigs;
+export default getCarSensorsWithConfigs;

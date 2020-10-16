@@ -1,7 +1,7 @@
 import SensorsRepository from '../repositories/SensorsRepository';
 import ConfigurationsRepository from '../repositories/ConfigurationsRepository';
 import errorResponse from '../utils/errorResponse';
-import getSensorsWithConfigs from '../services/GetSensorsWithConfigs';
+import getCarSensorsWithConfigs from '../services/GetCarSensorsWithConfigs';
 import { validateSensorName } from '../utils/validateSensor';
 import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 
@@ -15,7 +15,7 @@ async function index(request, response) {
     return errorResponse(response, 404, message);
   }
 
-  const serializedSensors = await getSensorsWithConfigs(chassis, sensors);
+  const serializedSensors = await getCarSensorsWithConfigs(chassis, sensors);
 
   return response.json(serializedSensors);
 }
