@@ -9,6 +9,7 @@ import SensorsController from './controllers/SensorsController';
 import ConfigurationsController from './controllers/ConfigurationsController';
 import ReviewsController from './controllers/ReviewsController';
 import AlertsController from './controllers/AlertsController';
+import TokensController from './controllers/TokensController';
 
 const routes = Router();
 
@@ -206,5 +207,42 @@ routes.post('/cars/:chassis/alerts', AlertsController.create);
  *        description: Internal Server Error
  */
 routes.patch('/configurations/:id', ConfigurationsController.update);
+
+/**
+ * @swagger
+ * /cars/{chassis}/tokens:
+ *  post:
+ *    tags:
+ *      - Tokens
+ *    description: Save token
+ *    consumes:
+ *      - application/json
+ *    parameters:
+ *       - name: chassis
+ *         description: Chassis to identify car
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: body
+ *         description: Request body
+ *         in: body
+ *         schema:
+ *           type: object
+ *           properties:
+ *             token:
+ *               type: string
+ *         required:
+ *           - token
+ *    responses:
+ *      '201':
+ *        description: Successful response
+ *      '400':
+ *        description: Invalid type for "token"
+ *      '404':
+ *        description: Car not found
+ *      '500':
+ *        description: Internal Server Error
+ */
+routes.post('/cars/:chassis/tokens', TokensController.create);
 
 export default routes;

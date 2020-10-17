@@ -32,14 +32,14 @@ async function create(request, response) {
   }
 
   const data = { type, description, carChassis: chassis };
-  const alert = await AlertsRepository.createAlert(data);
+  const newAlert = await AlertsRepository.createAlert(data);
 
-  if (!alert) {
+  if (!newAlert) {
     const message = `Internal Server Error`;
     return errorResponse(response, 500, message);
   }
 
-  return response.status(201).json(alert);
+  return response.status(201).json(newAlert);
 }
 
 export default { index, create };
