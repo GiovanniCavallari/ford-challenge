@@ -1,5 +1,13 @@
 import Queue from './lib/Queue';
+import ExpoServer from './lib/ExpoServer';
 import getQueueSensorsWithConfigs from './services/GetQueueSensorsWithConfigs';
+
+async function sendPushNotifications(sensor) {
+  ExpoServer.sendPushNotifications({
+    title: 'Alerta',
+    body: `Problema no sensor ${sensor}`,
+  });
+}
 
 async function producer() {
   const sensors = await getQueueSensorsWithConfigs();
@@ -24,8 +32,10 @@ async function producer() {
     if (sensor.configurations.active) {
       if (sensor.configurations.direction === 'increasing' && sensor.value >= parsedConfigValue) {
         queueMessage.error = true;
+        sendPushNotifications(sensor.translation);
       } else if (sensor.configurations.direction === 'decreasing' && sensor.value <= parsedConfigValue) {
         queueMessage.error = true;
+        sendPushNotifications(sensor.translation);
       }
     }
 
