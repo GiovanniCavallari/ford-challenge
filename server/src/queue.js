@@ -37,6 +37,9 @@ async function producer(page = 0) {
       } else if (sensor.configurations.direction === 'decreasing' && sensor.value <= parsedConfigValue) {
         queueMessage.error = true;
         sendPushNotifications(sensor.translation);
+      } else if (sensor.configurations.type === 'boolean' && sensor.value === false) {
+        queueMessage.error = true;
+        sendPushNotifications(sensor.translation);
       }
     }
 
