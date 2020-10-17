@@ -10,7 +10,6 @@ async function producer() {
       value: sensor.value,
       translation: sensor.translation,
       error: false,
-      message: 'No error',
       carChassis: sensor.carChassis,
       configurations: {
         unit: sensor.configurations.unit,
@@ -25,10 +24,8 @@ async function producer() {
     if (sensor.configurations.active) {
       if (sensor.configurations.direction === 'increasing' && sensor.value >= parsedConfigValue) {
         queueMessage.error = true;
-        queueMessage.message = 'Error increasing';
       } else if (sensor.configurations.direction === 'decreasing' && sensor.value <= parsedConfigValue) {
         queueMessage.error = true;
-        queueMessage.message = 'Error decreasing';
       }
     }
 

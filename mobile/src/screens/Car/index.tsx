@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { SensorsIcons } from '../../assets/styles/icons';
 import { ISensor } from '../Sensor/interfaces/SensorInterface';
 
 import api from '../../services/api';
+import registerForPushNotificationsAsync from '../../services/getPermissions';
 
 import SensorInfo from '../../components/SensorInfo';
 
@@ -45,6 +46,10 @@ const Car: React.FC = () => {
     api.get('/cars/123456').then((response) => {
       setCar(response.data);
     });
+  }, []);
+
+  useEffect(() => {
+    registerForPushNotificationsAsync();
   }, []);
 
   useFocusEffect(
