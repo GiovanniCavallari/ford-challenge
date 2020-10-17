@@ -2,8 +2,8 @@ import SensorsRepository from '../repositories/SensorsRepository';
 import ConfigurationsRepository from '../repositories/ConfigurationsRepository';
 import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 
-async function getQueueSensorsWithConfigs() {
-  const sensors = await SensorsRepository.getAllSensors();
+async function getQueueSensorsWithConfigs(page = 1) {
+  const sensors = await SensorsRepository.getAllSensors(page);
   const queueSensors = [];
 
   for (const sensor of sensors) {

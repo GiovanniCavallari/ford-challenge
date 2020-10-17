@@ -15,7 +15,7 @@ const add = (message) => {
       return conn.createChannel();
     })
     .then((ch) => {
-      console.log('Enviando mensagem');
+      console.log('Sending message...');
       ch.sendToQueue(queue, Buffer.from(message));
     })
     .catch(console.warn);

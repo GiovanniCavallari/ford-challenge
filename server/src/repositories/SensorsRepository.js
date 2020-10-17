@@ -27,7 +27,9 @@ async function getSensorsByCarChassis(chassis) {
   }
 }
 
-async function getAllSensors() {
+async function getAllSensors(page = 1) {
+  const offset = page - 1;
+
   try {
     const sensors = await Sensor.findAll({
       attributes: [
@@ -46,6 +48,7 @@ async function getAllSensors() {
         'rlTireTemp',
         'carChassis',
       ],
+      offset,
       limit: 1,
     });
     return sensors;

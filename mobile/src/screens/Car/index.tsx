@@ -4,7 +4,7 @@ import { SensorsIcons } from '../../assets/styles/icons';
 import { ISensor } from '../Sensor/interfaces/SensorInterface';
 
 import api from '../../services/api';
-import registerForPushNotificationsAsync from '../../services/getPermissions';
+import registerForPushNotificationsAsync from '../../services/registerForPushNotifications';
 
 import SensorInfo from '../../components/SensorInfo';
 

@@ -1,16 +1,18 @@
 import Queue from './lib/Queue';
 import ExpoServer from './lib/ExpoServer';
 import getQueueSensorsWithConfigs from './services/GetQueueSensorsWithConfigs';
+import waitToExecute from './utils/waitToExecute';
 
-async function sendPushNotifications(sensor) {
-  ExpoServer.sendPushNotifications({
-    title: 'Alerta',
-    body: `Problema no sensor ${sensor}`,
-  });
-}
+async function producer(page = 0) {
+  const sendPushNotifications = (sensor) => {
+    ExpoServer.sendPushNotifications({
+      title: 'Alerta',
+      body: `Problema no sensor ${sensor}`,
+    });
+  };
 
-async function producer() {
-  const sensors = await getQueueSensorsWithConfigs();
+  const dbPage = page + 1;
+  const sensors = await getQueueSensorsWithConfigs(dbPage);
 
   for (const sensor of sensors) {
     const queueMessage = {
@@ -28,7 +30,6 @@ async function producer() {
     };
 
     const parsedConfigValue = Number(sensor.configurations.value);
-
     if (sensor.configurations.active) {
       if (sensor.configurations.direction === 'increasing' && sensor.value >= parsedConfigValue) {
         queueMessage.error = true;
@@ -41,6 +42,8 @@ async function producer() {
 
     Queue.add(JSON.stringify(queueMessage));
   }
+
+  waitToExecute(2000, () => producer(dbPage));
 }
 
 producer();
