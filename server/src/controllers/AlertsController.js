@@ -44,8 +44,6 @@ async function create(request, response) {
     return errorResponse(response, 500, message);
   }
 
-  console.log(title, body);
-
   ExpoServer.sendPushNotifications({ title, body });
   return response.status(201).json(newAlert);
 }

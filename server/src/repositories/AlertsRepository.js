@@ -33,4 +33,7 @@ async function createAlert(data) {
   }
 }
 
-export default { getAlertsByCarChassis, createAlert };
+export default {
+  getAlertsByCarChassis,
+  createAlert,
+};

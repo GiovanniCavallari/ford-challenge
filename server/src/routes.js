@@ -218,6 +218,34 @@ routes.patch('/configurations/:id', ConfigurationsController.update);
 
 /**
  * @swagger
+ * /cars/{chassis}/tokens/{id}:
+ *  get:
+ *    tags:
+ *      - Tokens
+ *    description: Get token id
+ *    parameters:
+ *       - name: chassis
+ *         description: Chassis to identify car
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: id
+ *         description: Id to identify token
+ *         in: path
+ *         required: true
+ *         type: string
+ *    responses:
+ *      '204':
+ *        description: Successful response
+ *      '400':
+ *        description: Invalid token id
+ *      '404':
+ *        description: Car or Token not found
+ */
+routes.get('/cars/:chassis/tokens/:id', TokensController.show);
+
+/**
+ * @swagger
  * /cars/{chassis}/tokens:
  *  post:
  *    tags:

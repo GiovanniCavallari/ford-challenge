@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { Token } from '../models';
 
 async function getAllTokens() {
@@ -11,13 +12,34 @@ async function getAllTokens() {
   }
 }
 
-async function createToken(data) {
+async function getTokenById(id) {
   try {
-    const result = await Token.create(data);
+    const token = await Token.findOne({
+      attributes: ['id', 'token', 'carChassis'],
+      where: { id },
+    });
+    return token;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function createToken(data) {
+  const tokenData = {
+    ...data,
+    id: uuid(),
+  };
+
+  try {
+    const result = await Token.create(tokenData);
     return result;
   } catch (error) {
     return false;
   }
 }
 
-export default { getAllTokens, createToken };
+export default {
+  getAllTokens,
+  getTokenById,
+  createToken,
+};

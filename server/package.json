@@ -31,7 +31,8 @@
     "prettier": "^2.1.1",
     "sequelize": "^5.21.6",
     "swagger-jsdoc": "^4.0.0",
-    "swagger-ui-express": "^4.1.4"
+    "swagger-ui-express": "^4.1.4",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "eslint": "^7.7.0",

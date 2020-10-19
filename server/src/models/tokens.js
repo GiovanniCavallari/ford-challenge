@@ -1,9 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Token = sequelize.define('Token', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       primaryKey: true,
-      autoIncrement: true,
     },
     token: {
       type: DataTypes.STRING,
