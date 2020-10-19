@@ -12,6 +12,7 @@
     "migration:run": "sequelize db:migrate",
     "seed:run": "sequelize db:seed:all",
     "seed:undo": "sequelize db:seed:undo:all",
+    "seed:file": "sucrase-node src/importCsv.js",
     "format": "prettier --write \"src/**/*.js\"",
     "lint": "eslint \"src/**/*.js\" --fix"
   },

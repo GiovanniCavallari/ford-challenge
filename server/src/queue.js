@@ -46,7 +46,7 @@ async function producer(page = 0) {
     Queue.add(JSON.stringify(queueMessage));
   }
 
-  waitToExecute(2000, () => producer(dbPage));
+  waitToExecute(5000, () => producer(dbPage));
 }
 
 producer();
