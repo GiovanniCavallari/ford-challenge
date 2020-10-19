@@ -1,3 +1,4 @@
+import ExpoServer from '../lib/ExpoServer';
 import CarsRepository from '../repositories/CarsRepository';
 import AlertsRepository from '../repositories/AlertsRepository';
 import errorResponse from '../utils/errorResponse';
@@ -17,7 +18,11 @@ async function index(request, response) {
 
 async function create(request, response) {
   const { chassis } = request.params;
-  const { type, description } = request.body;
+  const {
+    type,
+    description,
+    notification: { title, body },
+  } = request.body;
 
   if (typeof type !== 'string' || typeof description !== 'string') {
     const message = 'Invalid type for "type" or "description"';
@@ -39,6 +44,9 @@ async function create(request, response) {
     return errorResponse(response, 500, message);
   }
 
+  console.log(title, body);
+
+  ExpoServer.sendPushNotifications({ title, body });
   return response.status(201).json(newAlert);
 }
 

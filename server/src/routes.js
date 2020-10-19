@@ -155,14 +155,22 @@ routes.get('/cars/:chassis/alerts', AlertsController.index);
  *               type: string
  *             description:
  *               type: string
+ *             notification:
+ *               type: object
+ *               properties:
+ *                 title:
+ *                   type: string
+ *                 body:
+ *                   type: string
  *         required:
  *           - type
  *           - description
+ *           - notification
  *    responses:
  *      '201':
  *        description: Successful response
  *      '400':
- *        description: Invalid type for "type" or "description"
+ *        description: Invalid type for "type", "description" or "notification"
  *      '404':
  *        description: Car not found
  *      '500':
