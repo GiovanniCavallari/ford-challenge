@@ -29,7 +29,6 @@ async function createAlert(data) {
     const result = await Alert.create(data);
     return result;
   } catch (error) {
-    console.log('Error', error);
     return false;
   }
 }

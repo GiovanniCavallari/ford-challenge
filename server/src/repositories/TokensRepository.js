@@ -16,7 +16,6 @@ async function createToken(data) {
     const result = await Token.create(data);
     return result;
   } catch (error) {
-    console.log(error);
     return false;
   }
 }

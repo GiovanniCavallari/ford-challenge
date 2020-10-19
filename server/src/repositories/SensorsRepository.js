@@ -69,8 +69,19 @@ async function getSensorsByName(name, chassis) {
   }
 }
 
+async function createSensor(data) {
+  try {
+    const result = await Sensor.create(data);
+    return result;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 export default {
   getSensorsByCarChassis,
   getAllSensors,
   getSensorsByName,
+  createSensor,
 };
