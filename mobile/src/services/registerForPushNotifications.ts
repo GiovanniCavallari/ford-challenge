@@ -1,4 +1,3 @@
-import { uuid } from 'uuidv4';
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
@@ -21,15 +20,24 @@ async function registerForPushNotificationsAsync() {
       return;
     }
 
+    const phoneTokenId = await AsyncStorage.getItem('@savedTokenId');
+
+    let validateToken: boolean;
     try {
-      const phoneToken = await AsyncStorage.getItem('@savedToken');
-      if (!phoneToken) {
-        const token = (await Notifications.getExpoPushTokenAsync()).data;
-        await api.post('/cars/123456/tokens', { token });
-        await AsyncStorage.setItem('@savedToken', token);
-      }
+      await api.get(`/cars/123456/tokens/${phoneTokenId}`);
+      validateToken = true;
     } catch (error) {
-      alert('Error to save token');
+      validateToken = false;
+    }
+
+    if (!phoneTokenId || !validateToken) {
+      try {
+        const token = (await Notifications.getExpoPushTokenAsync()).data;
+        const tokenId = await api.post('/cars/123456/tokens', { token });
+        await AsyncStorage.setItem('@savedTokenId', tokenId.data.id);
+      } catch (error) {
+        alert('Error to save token');
+      }
     }
   } else {
     alert('Must use physical device for Push Notifications');
