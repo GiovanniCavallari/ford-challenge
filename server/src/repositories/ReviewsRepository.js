@@ -6,6 +6,7 @@ async function getReviewsByCarChassis(chassis) {
     const result = await Review.findAll({
       attributes: ['id', 'date', 'type', 'description', 'carChassis'],
       where: { carChassis: chassis },
+      order: [['id', 'DESC']],
     });
 
     const reviews = result.map((review) => {

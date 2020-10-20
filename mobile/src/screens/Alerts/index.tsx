@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { RefreshControl } from 'react-native';
 
 import api from '../../services/api';
 import { firstCapitalLetter } from '../../common/helpers';
@@ -18,11 +19,17 @@ interface Item {
 
 const Alerts: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const getItems = useCallback(() => {
-    api.get('/cars/123456/alerts').then((response) => {
-      setItems(response.data);
-    });
+  const getItems = useCallback(async () => {
+    const response = await api.get('/cars/123456/alerts');
+    setItems(response.data);
+  }, []);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await getItems();
+    setRefreshing(false);
   }, []);
 
   useEffect(() => {
@@ -34,7 +41,7 @@ const Alerts: React.FC = () => {
       <Container>
         <Header title="Alertas" />
 
-        <Content>
+        <Content refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
           <Main>
             {items.map((item) => (
               <Card key={String(item.id)} title={firstCapitalLetter(item.type)} footer={item.date} footerAlign="right">

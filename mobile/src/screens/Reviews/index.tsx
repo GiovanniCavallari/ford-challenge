@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { RefreshControl } from 'react-native';
 
 import api from '../../services/api';
 
@@ -17,11 +18,17 @@ interface Item {
 
 const Reviews: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const getItems = useCallback(() => {
-    api.get('/cars/123456/reviews').then((response) => {
-      setItems(response.data);
-    });
+  const getItems = useCallback(async () => {
+    const response = await api.get('/cars/123456/reviews');
+    setItems(response.data);
+  }, []);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await getItems();
+    setRefreshing(false);
   }, []);
 
   useEffect(() => {
@@ -33,7 +40,7 @@ const Reviews: React.FC = () => {
       <Container>
         <Header title="Revisões" />
 
-        <Content>
+        <Content refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
           <Main>
             {items.map((item) => (
               <Card key={String(item.id)} title={item.type} footer={`Data da revisão: ${item.date}`}>

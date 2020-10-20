@@ -6,6 +6,7 @@ async function getAlertsByCarChassis(chassis) {
     const result = await Alert.findAll({
       attributes: ['id', 'type', 'description', 'carChassis', 'createdAt'],
       where: { carChassis: chassis },
+      order: [['id', 'DESC']],
     });
 
     const alerts = result.map((alert) => {
