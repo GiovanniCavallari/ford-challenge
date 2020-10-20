@@ -1,5 +1,7 @@
 import speech_recognition as sr
 import pyttsx3
+import requests
+
 
 #Configurações
 r = sr.Recognizer() #Cria uma nova instância de Recognizer, que representa uma coleção de configurações e funcionalidades de reconhecimento de fala
@@ -13,11 +15,11 @@ engine.setProperty('rate', speech_rate+63) #aumenta em +65
 
 def combustivel(fala):
     # - Checar na API nivel do combustivel
-    engine.say('Há ' +porcento_combustivel+' porcento do tanque de combustível. Deseja verificar mais alguma coisa?')
+    engine.say('Há ' + str(sensors('fuel')) + ' porcento do tanque de combustível. Deseja verificar mais alguma coisa?')
     engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)     
-    speech = r.recognize_google(audio, language= 'pt')
+    speech = r.recognize_google(audio, language='pt')
     if 'não' in speech:
         # continuar = 0
         speech = 0
@@ -28,11 +30,14 @@ def combustivel(fala):
 
 def oleoMotor(fala):
     # - Checar na API nivel do óleo
-    engine.say('O nível do óleo está ok! Algo mais?')
+    if(sensors('oil')):
+        engine.say('A pressão do óleo está ok! Algo mais?')
+    else:
+        engine.say('A pressão do óleo está baixa, favor verificar! Algo mais?')
     engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)     
-    speech = r.recognize_google(audio, language= 'pt')
+    speech = r.recognize_google(audio, language='pt')
     if 'não' in speech:
         speech = 0
         engine.say('Ta bom, pode contar comigo sempre que precisar')
@@ -47,17 +52,36 @@ def freio(fala):
     engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)     
-    speech = r.recognize_google(audio, language= 'pt')
+    speech = r.recognize_google(audio, language='pt')
     if 'não' in speech:
         speech = 0
         engine.say('Ta bom, pode contar comigo sempre que precisar')
         engine.runAndWait()
         return speech
 
+def temperatura(fala):
 
+    engine.say('O motor esta à ' + temperatura_eng + ' graus celsius. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+def sensors(req):
+    sensor = requests.get(base+req).json()
+    return sensor['value']
+
+base = 'https://fordva-aylrs.ondigitalocean.app/cars/123456/sensors/'
 oi = 'Oi, sou a Fordina! Como posso ajudar?'
-porcento_combustivel = '80'
-nivelOleo = 'OK'
+#porcento_combustivel = str(sensors('fuel'))
+#nivelOleo = sensors('oil')
+temperatura_eng = str(sensors('temperature'))
 
 with sr.Microphone() as s:
         engine.say(oi)
@@ -83,10 +107,13 @@ with sr.Microphone() as s:
                 elif 'freio' in speech:
                     freio(speech)
 
+                elif 'temperatura' in speech:
+                    temperatura(speech)
+
                 else:
                      #print('Não entendi. Pode repetir?')
-                        engine.say('Não entendi. Pode repetir?')
-                        engine.runAndWait()
+                    engine.say('Não entendi. Pode repetir?')
+                    engine.runAndWait()
             # except:
             #     engine.say('Tá bom, qualquer coisa, é só perguntar!')
             #     engine.runAndWait() 
