@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://6a0ca2d9c657.ngrok.io',
+  baseURL: 'https://fordva-aylrs.ondigitalocean.app',
 });
 
 export default api;
-
-// baseURL: 'https://fordva-aylrs.ondigitalocean.app',
