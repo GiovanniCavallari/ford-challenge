@@ -9,6 +9,7 @@ import SensorsController from './controllers/SensorsController';
 import ConfigurationsController from './controllers/ConfigurationsController';
 import ReviewsController from './controllers/ReviewsController';
 import AlertsController from './controllers/AlertsController';
+import TokensController from './controllers/TokensController';
 
 const routes = Router();
 
@@ -131,6 +132,54 @@ routes.get('/cars/:chassis/alerts', AlertsController.index);
 
 /**
  * @swagger
+ * /cars/{chassis}/alerts:
+ *  post:
+ *    tags:
+ *      - Alerts
+ *    description: Create alert
+ *    consumes:
+ *      - application/json
+ *    parameters:
+ *       - name: chassis
+ *         description: Chassis to identify car
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: body
+ *         description: Request body
+ *         in: body
+ *         schema:
+ *           type: object
+ *           properties:
+ *             type:
+ *               type: string
+ *             description:
+ *               type: string
+ *             notification:
+ *               type: object
+ *               properties:
+ *                 title:
+ *                   type: string
+ *                 body:
+ *                   type: string
+ *         required:
+ *           - type
+ *           - description
+ *           - notification
+ *    responses:
+ *      '201':
+ *        description: Successful response
+ *      '400':
+ *        description: Invalid type for "type", "description" or "notification"
+ *      '404':
+ *        description: Car not found
+ *      '500':
+ *        description: Internal Server Error
+ */
+routes.post('/cars/:chassis/alerts', AlertsController.create);
+
+/**
+ * @swagger
  * /configurations/{id}:
  *  patch:
  *    tags:
@@ -166,5 +215,70 @@ routes.get('/cars/:chassis/alerts', AlertsController.index);
  *        description: Internal Server Error
  */
 routes.patch('/configurations/:id', ConfigurationsController.update);
+
+/**
+ * @swagger
+ * /cars/{chassis}/tokens/{id}:
+ *  get:
+ *    tags:
+ *      - Tokens
+ *    description: Get token id
+ *    parameters:
+ *       - name: chassis
+ *         description: Chassis to identify car
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: id
+ *         description: Id to identify token
+ *         in: path
+ *         required: true
+ *         type: string
+ *    responses:
+ *      '204':
+ *        description: Successful response
+ *      '400':
+ *        description: Invalid token id
+ *      '404':
+ *        description: Car or Token not found
+ */
+routes.get('/cars/:chassis/tokens/:id', TokensController.show);
+
+/**
+ * @swagger
+ * /cars/{chassis}/tokens:
+ *  post:
+ *    tags:
+ *      - Tokens
+ *    description: Save token
+ *    consumes:
+ *      - application/json
+ *    parameters:
+ *       - name: chassis
+ *         description: Chassis to identify car
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: body
+ *         description: Request body
+ *         in: body
+ *         schema:
+ *           type: object
+ *           properties:
+ *             token:
+ *               type: string
+ *         required:
+ *           - token
+ *    responses:
+ *      '201':
+ *        description: Successful response
+ *      '400':
+ *        description: Invalid type for "token"
+ *      '404':
+ *        description: Car not found
+ *      '500':
+ *        description: Internal Server Error
+ */
+routes.post('/cars/:chassis/tokens', TokensController.create);
 
 export default routes;

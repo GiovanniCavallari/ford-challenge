@@ -36,6 +36,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'carChassis',
       as: 'configurations',
     });
+
+    Car.hasMany(models.Token, {
+      foreignKey: 'carChassis',
+      as: 'tokens',
+    });
   };
 
   return Car;

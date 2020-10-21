@@ -1,14 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
-  const Alert = sequelize.define('Alert', {
+  const Token = sequelize.define('Token', {
     id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    type: {
       type: DataTypes.STRING,
+      primaryKey: true,
     },
-    description: {
+    token: {
       type: DataTypes.STRING,
     },
     carChassis: {
@@ -16,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Alert.associate = (models) => {
-    Alert.belongsTo(models.Car, {
+  Token.associate = (models) => {
+    Token.belongsTo(models.Car, {
       foreignKey: 'carChassis',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
   };
 
-  return Alert;
+  return Token;
 };

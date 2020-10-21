@@ -23,4 +23,7 @@ async function updateConfiguration(id, data) {
   }
 }
 
-export default { getConfigurationByName, updateConfiguration };
+export default {
+  getConfigurationByName,
+  updateConfiguration,
+};

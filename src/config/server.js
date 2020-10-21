@@ -19,6 +19,12 @@ module.exports = {
       pgAdminDefaultPassword: 123456,
       dockerDataFolder: '~/docker-data',
     },
+    rabbitmq: {
+      rabbitmqHost: 'localhost',
+      rabbitmqErlangCookie: 'topSecretCookieErlang2020',
+      rabbitmqDefaultUser: 'rabbitmq',
+      rabbitmqDefaultPass: 'rabbitmq',
+    },
   },
   production: {
     url: process.env.SERVER_URL,
@@ -37,6 +43,12 @@ module.exports = {
       pgAdminDefaultEmail: process.env.PGADMIN_DEFAULT_EMAIL,
       pgAdminDefaultPassword: process.env.PGADMIN_DEFAULT_PASSWORD,
       dockerDataFolder: process.env.DOCKER_DATA_FOLDER,
+    },
+    rabbitmq: {
+      rabbitmqHost: process.env.RABBITMQ_HOST,
+      rabbitmqErlangCookie: process.env.RABBITMQ_ERLANG_COOKIE,
+      rabbitmqDefaultUser: process.env.RABBITMQ_DEFAULT_USER,
+      rabbitmqDefaultPass: process.env.RABBITMQ_DEFAULT_PASS,
     },
   },
 };

@@ -1,6 +1,6 @@
 import errorResponse from '../utils/errorResponse';
 import CarsRepository from '../repositories/CarsRepository';
-import getSensorsWithConfigs from '../services/GetSensorsWithConfigs';
+import getCarSensorsWithConfigs from '../services/GetCarSensorsWithConfigs';
 
 async function index(request, response) {
   const { chassis } = request.params;
@@ -13,7 +13,7 @@ async function index(request, response) {
   }
 
   const { name, model, licensePlate } = car;
-  const sensors = await getSensorsWithConfigs(chassis, car.sensors);
+  const sensors = await getCarSensorsWithConfigs(chassis, car.sensors);
 
   return response.json({ chassis: Number(chassis), name, model, licensePlate, sensors });
 }

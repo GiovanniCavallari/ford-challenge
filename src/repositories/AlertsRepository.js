@@ -6,6 +6,7 @@ async function getAlertsByCarChassis(chassis) {
     const result = await Alert.findAll({
       attributes: ['id', 'type', 'description', 'carChassis', 'createdAt'],
       where: { carChassis: chassis },
+      order: [['id', 'DESC']],
     });
 
     const alerts = result.map((alert) => {
@@ -24,4 +25,16 @@ async function getAlertsByCarChassis(chassis) {
   }
 }
 
-export default { getAlertsByCarChassis };
+async function createAlert(data) {
+  try {
+    const result = await Alert.create(data);
+    return result;
+  } catch (error) {
+    return false;
+  }
+}
+
+export default {
+  getAlertsByCarChassis,
+  createAlert,
+};

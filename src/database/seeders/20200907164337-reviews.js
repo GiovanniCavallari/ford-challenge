@@ -4,7 +4,6 @@ module.exports = {
       'Reviews',
       [
         {
-          id: 1,
           date: new Date(),
           type: '5000 km rodados',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque molestie metus.',
@@ -13,7 +12,6 @@ module.exports = {
           carChassis: 123456,
         },
         {
-          id: 2,
           date: new Date(),
           type: 'Motor',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque molestie metus.',
