@@ -11,9 +11,13 @@ export const Container = styled.TouchableOpacity`
   box-shadow: 10px 5px 5px #000;
 `;
 
+export const LabelsContainer = styled.View`
+  flex-direction: row;
+  margin-bottom: 12px;
+`;
+
 export const Header = styled.View`
   padding-bottom: 8px;
-  margin-top: 12px;
 `;
 
 export const Title = styled.Text`
@@ -39,8 +43,4 @@ export const FooterContent = styled.Text<{ align?: string }>`
   font-size: ${theme.font.size.normal}px;
   text-align: ${props => props.align ?? 'left'};
   line-height: 14px;
-`;
-
-export const LabelsContainer = styled.View`
-  flex-direction: row;
 `;

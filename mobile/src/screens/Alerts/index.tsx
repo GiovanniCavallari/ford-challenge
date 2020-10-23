@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import api from '../../services/api';
 import { firstCapitalLetter } from '../../common/helpers';
@@ -36,6 +37,15 @@ const Alerts: React.FC = () => {
     getItems();
   }, [getItems]);
 
+  const navigation = useNavigation();
+
+  const handleAlertToDetails = (id: number, carChassis: number) => {
+    navigation.navigate('DetalhesAlerta', {
+      id,
+      chassis: carChassis,
+    });
+  };
+
   return (
     <Wrapper>
       <Container>
@@ -50,6 +60,8 @@ const Alerts: React.FC = () => {
                 title={firstCapitalLetter(item.type)}
                 footer={item.date}
                 footerAlign="right"
+                labels={true}
+                onPress={() => handleAlertToDetails(item.id, item.carChassis)}
               >
                 {item.description}
               </Card>

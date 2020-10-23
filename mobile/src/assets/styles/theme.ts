@@ -3,6 +3,7 @@ export default {
     size: {
       small: 11,
       normal: 12,
+      semiregular: 13,
       regular: 14,
       medium: 15,
       large: 18,
@@ -37,5 +38,6 @@ export default {
     darkblue: '#006DA7',
     yellow: '#FBC400',
     labelText: '#747474',
+    subtitle: '#6F7B81',
   }
 }

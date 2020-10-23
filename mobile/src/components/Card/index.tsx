@@ -5,19 +5,23 @@ import Label from '../Label';
 import { Container, Header, Title, Body, BodyContent, Footer, FooterContent, LabelsContainer } from './styled';
 
 interface Props {
-  id: number;
+  id?: number;
   title: string;
   footer: string;
   footerAlign?: 'left' | 'right';
+  labels: boolean;
+  onPress?: () => void;
 }
 
-const Card: React.FC<Props> = ({ id, title, children, footer, footerAlign }) => {
+const Card: React.FC<Props> = ({ id, title, children, footer, footerAlign, labels, onPress }) => {
   return (
-    <Container>
-      <LabelsContainer>
-        <Label notification={true} opened={false}>Novo</Label>
-        <Label notification={false} opened={true}>#{id}</Label>
-      </LabelsContainer>
+    <Container onPress={onPress}>
+      {labels && (
+        <LabelsContainer>
+          <Label notification={true} opened={false}>Novo</Label>
+          <Label notification={false} opened={true}>#{id}</Label>
+        </LabelsContainer>
+      )}
 
       <Header>
         <Title>{title}</Title>
