@@ -2,9 +2,9 @@ import styled from 'styled-components/native';
 
 import theme from '../../assets/styles/theme';
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   margin: 25px 0px 0px;
-  padding: 8px 14px;
+  padding: 12px 14px;
 
   border-radius: 8px;
   background: ${theme.colors.white};
@@ -13,6 +13,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   padding-bottom: 8px;
+  margin-top: 12px;
 `;
 
 export const Title = styled.Text`
@@ -22,7 +23,7 @@ export const Title = styled.Text`
 `;
 
 export const Body = styled.View`
-  padding-bottom: 8px;
+  padding-bottom: 12px;
 `;
 
 export const BodyContent = styled.Text`
@@ -33,9 +34,13 @@ export const BodyContent = styled.Text`
 
 export const Footer = styled.View``;
 
-export const FooterContent = styled.Text<{ align: string }>`
+export const FooterContent = styled.Text<{ align?: string }>`
   font-family: ${theme.font.weight.medium};
   font-size: ${theme.font.size.normal}px;
   text-align: ${props => props.align ?? 'left'};
   line-height: 14px;
+`;
+
+export const LabelsContainer = styled.View`
+  flex-direction: row;
 `;

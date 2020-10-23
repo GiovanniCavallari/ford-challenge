@@ -44,7 +44,13 @@ const Alerts: React.FC = () => {
         <Content refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
           <Main>
             {items.map((item) => (
-              <Card key={String(item.id)} title={firstCapitalLetter(item.type)} footer={item.date} footerAlign="right">
+              <Card
+                key={String(item.id)}
+                id={item.id}
+                title={firstCapitalLetter(item.type)}
+                footer={item.date}
+                footerAlign="right"
+              >
                 {item.description}
               </Card>
             ))}
