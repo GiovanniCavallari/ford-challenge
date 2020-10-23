@@ -7,6 +7,7 @@
     "build": "sucrase src/ -d build/ --transforms imports",
     "start": "node build/server.js",
     "dev:start": "nodemon src/server.js",
+    "dev:debug": "nodemon --exec 'node --inspect -r sucrase/register src/server.js'",
     "dev:queue": "nodemon src/queue.js",
     "db:run": "npm run migration:run && npm run seed:run",
     "migration:run": "sequelize db:migrate",
