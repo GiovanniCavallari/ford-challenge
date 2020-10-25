@@ -1,23 +1,19 @@
 module.exports = {
   up: (queryInterface) => {
     return queryInterface.bulkInsert(
-      'Alerts',
+      'Solutions',
       [
         {
-          title: 'Temperatura do motor elevada',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque molestie metus.',
           sensor: 'temperature',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque molestie metus.',
           createdAt: new Date(),
           updatedAt: new Date(),
-          carChassis: 123456,
         },
         {
-          title: 'Quilometragem ultrapassou os 100.000km',
+          sensor: 'temperature',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque molestie metus.',
-          sensor: 'odometer',
           createdAt: new Date(),
           updatedAt: new Date(),
-          carChassis: 123456,
         },
       ],
       {},
@@ -25,6 +21,6 @@ module.exports = {
   },
 
   down: (queryInterface) => {
-    return queryInterface.bulkDelete('Alerts', null, {});
+    return queryInterface.bulkDelete('Solutions', null, {});
   },
 };

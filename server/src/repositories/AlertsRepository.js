@@ -4,7 +4,7 @@ import { formatDateAndHour } from '../utils/formatDate';
 async function getAlertsByCarChassis(chassis) {
   try {
     const result = await Alert.findAll({
-      attributes: ['id', 'type', 'description', 'carChassis', 'createdAt'],
+      attributes: ['id', 'title', 'description', 'sensor', 'carChassis', 'createdAt'],
       where: { carChassis: chassis },
       order: [['id', 'DESC']],
     });
@@ -25,6 +25,25 @@ async function getAlertsByCarChassis(chassis) {
   }
 }
 
+async function getAlertsById(id) {
+  try {
+    const result = await Alert.findOne({
+      attributes: ['id', 'title', 'description', 'sensor', 'carChassis', 'createdAt'],
+      where: { id },
+    });
+
+    const alerts = {
+      ...result.dataValues,
+      date: formatDateAndHour(result.createdAt),
+    };
+    delete alerts.createdAt;
+
+    return alerts;
+  } catch (error) {
+    return false;
+  }
+}
+
 async function createAlert(data) {
   try {
     const result = await Alert.create(data);
@@ -36,5 +55,6 @@ async function createAlert(data) {
 
 export default {
   getAlertsByCarChassis,
+  getAlertsById,
   createAlert,
 };

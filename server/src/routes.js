@@ -132,6 +132,32 @@ routes.get('/cars/:chassis/alerts', AlertsController.index);
 
 /**
  * @swagger
+ * /cars/{chassis}/alerts/{id}:
+ *  get:
+ *    tags:
+ *      - Alerts
+ *    description: Get alert information and possible solutions
+ *    parameters:
+ *       - name: chassis
+ *         description: Chassis to identify car
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: id
+ *         description: Id to identify alert
+ *         in: path
+ *         required: true
+ *         type: integer
+ *    responses:
+ *      '200':
+ *        description: Successful response
+ *      '404':
+ *        description: Car or Alert not found
+ */
+routes.get('/cars/:chassis/alerts/:id', AlertsController.show);
+
+/**
+ * @swagger
  * /cars/{chassis}/alerts:
  *  post:
  *    tags:
@@ -151,9 +177,11 @@ routes.get('/cars/:chassis/alerts', AlertsController.index);
  *         schema:
  *           type: object
  *           properties:
- *             type:
+ *             title:
  *               type: string
  *             description:
+ *               type: string
+ *             sensor:
  *               type: string
  *             notification:
  *               type: object
@@ -163,14 +191,15 @@ routes.get('/cars/:chassis/alerts', AlertsController.index);
  *                 body:
  *                   type: string
  *         required:
- *           - type
+ *           - title
  *           - description
+ *           - sensor
  *           - notification
  *    responses:
  *      '201':
  *        description: Successful response
  *      '400':
- *        description: Invalid type for "type", "description" or "notification"
+ *        description: Invalid sensor name or invalid type for "title", "description" or "notification"
  *      '404':
  *        description: Car not found
  *      '500':
