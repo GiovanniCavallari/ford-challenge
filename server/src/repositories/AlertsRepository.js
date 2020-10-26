@@ -1,5 +1,6 @@
 import { Alert } from '../models';
 import { formatDateAndHour } from '../utils/formatDate';
+import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 
 async function getAlertsByCarChassis(chassis) {
   try {
@@ -13,6 +14,7 @@ async function getAlertsByCarChassis(chassis) {
       const serializedAlert = {
         ...alert.dataValues,
         date: formatDateAndHour(alert.createdAt),
+        translation: sensorNameTranslations[alert.sensor],
       };
 
       delete serializedAlert.createdAt;
@@ -25,7 +27,7 @@ async function getAlertsByCarChassis(chassis) {
   }
 }
 
-async function getAlertsById(id) {
+async function getAlertById(id) {
   try {
     const result = await Alert.findOne({
       attributes: ['id', 'title', 'description', 'sensor', 'carChassis', 'createdAt'],
@@ -35,6 +37,7 @@ async function getAlertsById(id) {
     const alerts = {
       ...result.dataValues,
       date: formatDateAndHour(result.createdAt),
+      translation: sensorNameTranslations[result.sensor],
     };
     delete alerts.createdAt;
 
@@ -55,6 +58,6 @@ async function createAlert(data) {
 
 export default {
   getAlertsByCarChassis,
-  getAlertsById,
+  getAlertById,
   createAlert,
 };

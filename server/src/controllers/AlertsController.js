@@ -4,7 +4,6 @@ import AlertsRepository from '../repositories/AlertsRepository';
 import SolutionsRepository from '../repositories/SolutionsRepository';
 import errorResponse from '../utils/errorResponse';
 import { validateSensorName } from '../utils/validateSensor';
-import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 
 async function index(request, response) {
   const { chassis } = request.params;
@@ -29,7 +28,7 @@ async function show(request, response) {
     return errorResponse(response, 404, message);
   }
 
-  const alert = await AlertsRepository.getAlertsById(id);
+  const alert = await AlertsRepository.getAlertById(id);
 
   if (!alert) {
     const message = `Alert with id ${id} not found`;
@@ -38,7 +37,7 @@ async function show(request, response) {
 
   const solutions = await SolutionsRepository.getSolutionsBySensorName(alert.sensor);
 
-  return response.json({ ...alert, sensor: sensorNameTranslations[alert.sensor], solutions });
+  return response.json({ ...alert, solutions });
 }
 
 async function create(request, response) {

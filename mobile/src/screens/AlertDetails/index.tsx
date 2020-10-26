@@ -36,6 +36,7 @@ const AlertDetails: React.FC = () => {
     date: '',
     title: '',
     sensor: '',
+    translation: '',
     description: '',
     carChassis: 0,
     solutions: [],
@@ -68,15 +69,12 @@ const AlertDetails: React.FC = () => {
               <Label notification={false} opened={true}>
                 #{alert.id}
               </Label>
+              <Label notification={false} opened={true}>
+                {alert.translation}
+              </Label>
             </LabelsContainer>
 
             <Title>{alert.title}</Title>
-            <Divider marginTop={true} />
-
-            <Detail>
-              <Subtitle>Sensor</Subtitle>
-              <SensorText>{alert.sensor}</SensorText>
-            </Detail>
             <Divider marginTop={true} />
 
             <Detail>

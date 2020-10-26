@@ -1,14 +1,22 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
 import theme from '../../assets/styles/theme';
 
-export const Container = styled.TouchableOpacity`
+const containerCss = css`
   margin: 25px 0px 0px;
   padding: 12px 14px;
 
   border-radius: 8px;
   background: ${theme.colors.white};
   box-shadow: 10px 5px 5px #000;
+`;
+
+export const TouchableContainer = styled.TouchableOpacity`
+  ${containerCss}
+`;
+
+export const NonTouchableContainer = styled.View`
+  ${containerCss}
 `;
 
 export const LabelsContainer = styled.View`
@@ -41,6 +49,6 @@ export const Footer = styled.View``;
 export const FooterContent = styled.Text<{ align?: string }>`
   font-family: ${theme.font.weight.medium};
   font-size: ${theme.font.size.normal}px;
-  text-align: ${props => props.align ?? 'left'};
+  text-align: ${(props) => props.align ?? 'left'};
   line-height: 14px;
 `;
