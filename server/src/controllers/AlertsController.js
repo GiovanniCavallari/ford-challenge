@@ -4,6 +4,7 @@ import AlertsRepository from '../repositories/AlertsRepository';
 import SolutionsRepository from '../repositories/SolutionsRepository';
 import errorResponse from '../utils/errorResponse';
 import { validateSensorName } from '../utils/validateSensor';
+import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 
 async function index(request, response) {
   const { chassis } = request.params;
@@ -37,7 +38,7 @@ async function show(request, response) {
 
   const solutions = await SolutionsRepository.getSolutionsBySensorName(alert.sensor);
 
-  return response.json({ ...alert, solutions });
+  return response.json({ ...alert, sensor: sensorNameTranslations[alert.sensor], solutions });
 }
 
 async function create(request, response) {

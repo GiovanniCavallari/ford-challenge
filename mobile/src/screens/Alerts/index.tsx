@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { IAlert } from './interfaces/AlertInterface';
 
 import api from '../../services/api';
 import { firstCapitalLetter } from '../../common/helpers';
@@ -10,16 +11,8 @@ import Header from '../../components/Header';
 
 import { Wrapper, Container, Content, Main } from './styled';
 
-interface Item {
-  id: number;
-  date: string;
-  type: string;
-  description: string;
-  carChassis: number;
-}
-
 const Alerts: React.FC = () => {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<IAlert[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const getItems = useCallback(async () => {
@@ -57,7 +50,7 @@ const Alerts: React.FC = () => {
               <Card
                 key={String(item.id)}
                 id={item.id}
-                title={firstCapitalLetter(item.type)}
+                title={firstCapitalLetter(item.title)}
                 footer={item.date}
                 footerAlign="right"
                 labels={true}

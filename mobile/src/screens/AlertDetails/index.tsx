@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
+import { IAlert } from '../Alerts/interfaces/AlertInterface';
+
+import api from '../../services/api';
 
 import Header from '../../components/Header';
 import Label from '../../components/Label';
@@ -15,6 +18,7 @@ import {
   Detail,
   Subtitle,
   Description,
+  SensorText,
   PossibleSolutions,
   ListItem,
   ListBullet,
@@ -27,8 +31,28 @@ interface RouteParams {
 }
 
 const AlertDetails: React.FC = () => {
+  const [alert, setAlert] = useState<IAlert>({
+    id: 0,
+    date: '',
+    title: '',
+    sensor: '',
+    description: '',
+    carChassis: 0,
+    solutions: [],
+  });
+
   const route = useRoute();
   const routeParams = route.params as RouteParams;
+
+  const getAlert = useCallback(() => {
+    api.get(`/cars/${routeParams.chassis}/alerts/${routeParams.id}`).then((response) => {
+      setAlert(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    getAlert();
+  }, [getAlert]);
 
   return (
     <Wrapper>
@@ -42,60 +66,40 @@ const AlertDetails: React.FC = () => {
                 Novo
               </Label>
               <Label notification={false} opened={true}>
-                #{routeParams.id}
+                #{alert.id}
               </Label>
             </LabelsContainer>
 
-            <Title>Pressão do pneu dianteiro direito</Title>
+            <Title>{alert.title}</Title>
             <Divider marginTop={true} />
 
             <Detail>
-              <Subtitle>Criado em</Subtitle>
-              <Description>31/08/2020 - 10:00</Description>
+              <Subtitle>Sensor</Subtitle>
+              <SensorText>{alert.sensor}</SensorText>
+            </Detail>
+            <Divider marginTop={true} />
+
+            <Detail>
+              <Subtitle>Reportado em</Subtitle>
+              <Description>{alert.date}</Description>
             </Detail>
             <Divider marginTop={true} />
 
             <Detail>
               <Subtitle>Descrição</Subtitle>
-              <Description>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque molestie metus, id tincidunt
-                urna aliquam in.
-              </Description>
+              <Description>{alert.description}</Description>
             </Detail>
             <Divider marginTop={true} />
 
             <Detail>
               <Subtitle>Possíveis soluções</Subtitle>
               <PossibleSolutions>
-                <ListItem>
-                  <ListBullet />
-                  <ListText>Lorem ipsum dolor sit amet amet, consectetur adipiscing</ListText>
-                </ListItem>
-
-                <ListItem>
-                  <ListBullet />
-                  <ListText>Lorem ipsum dolor sit amet amet, consectetur adipiscing</ListText>
-                </ListItem>
-
-                <ListItem>
-                  <ListBullet />
-                  <ListText>Lorem ipsum dolor sit amet amet, consectetur adipiscing</ListText>
-                </ListItem>
-
-                <ListItem>
-                  <ListBullet />
-                  <ListText>Lorem ipsum dolor sit amet amet, consectetur adipiscing</ListText>
-                </ListItem>
-
-                <ListItem>
-                  <ListBullet />
-                  <ListText>Lorem ipsum dolor sit amet amet, consectetur adipiscing</ListText>
-                </ListItem>
-
-                <ListItem>
-                  <ListBullet />
-                  <ListText>Lorem ipsum dolor sit amet amet, consectetur adipiscing</ListText>
-                </ListItem>
+                {alert.solutions.map((item) => (
+                  <ListItem key={item}>
+                    <ListBullet />
+                    <ListText>{item}</ListText>
+                  </ListItem>
+                ))}
               </PossibleSolutions>
             </Detail>
           </Main>
