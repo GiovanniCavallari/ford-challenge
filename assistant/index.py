@@ -1,7 +1,7 @@
 import speech_recognition as sr
 import pyttsx3
 import requests
-
+import threading
 
 #Configurações
 r = sr.Recognizer() #Cria uma nova instância de Recognizer, que representa uma coleção de configurações e funcionalidades de reconhecimento de fala
@@ -12,6 +12,19 @@ r.energy_threshold = 4000 #Representa o limite do nível de energia para sons. V
 speech_rate = engine.getProperty('rate') #pegando a propriedade 'rate'
 engine.setProperty('rate', speech_rate+63) #aumenta em +65
 #Taxa de fala em palavras por minuto. O padrão é 200 palavras por minuto.
+
+def consumir_fila():
+    #integrar com o rabbitmq
+    
+
+def reconhecimento():
+    #Reconhecer a voz de resposta para o alerta vindo do bot pela fila(?)
+
+
+threadReconhecimento = threading.Thread(targed=reconhecimento)
+threadReconhecimento.daemon = True
+threadReconhecimento.start()
+consumir_fila()
 
 def combustivel(fala):
     # - Checar na API nivel do combustivel
