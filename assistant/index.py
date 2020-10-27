@@ -31,9 +31,9 @@ def combustivel(fala):
 def oleoMotor(fala):
     # - Checar na API nivel do óleo
     if(sensors('oil')):
-        engine.say('A pressão do óleo está ok! Algo mais?')
+        engine.say('A pressão do óleo está baixa, favor verificar! Algo mais')
     else:
-        engine.say('A pressão do óleo está baixa, favor verificar! Algo mais?')
+        engine.say('A pressão do óleo está ok! Algo mais?')
     engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)     
@@ -46,9 +46,10 @@ def oleoMotor(fala):
 
 
 def freio(fala):
-    # - Checar na API nivel do óleo
-    engine.say('Cuidado! Você precisa trocar a pastilha do freio! Agende a troca assim que possível.')
-    engine.say(' Posso ajudar em algo mais?')
+    if(sensors('brake')):
+        engine.say('A pastilha de freio está desgastada, favor verificar! Algo mais')
+    else:
+        engine.say('A pastilha de freio está ok! Algo mais?')
     engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)     
@@ -61,7 +62,7 @@ def freio(fala):
 
 def temperatura(fala):
 
-    engine.say('O motor esta à ' + temperatura_eng + ' graus celsius. Deseja verificar mais alguma coisa?')
+    engine.say('O motor esta à ' + str(sensors('temperature')) + ' graus celsius. Deseja verificar mais alguma coisa?')
     engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)
@@ -79,9 +80,7 @@ def sensors(req):
 
 base = 'https://fordva-aylrs.ondigitalocean.app/cars/123456/sensors/'
 oi = 'Oi, sou a Fordina! Como posso ajudar?'
-#porcento_combustivel = str(sensors('fuel'))
-#nivelOleo = sensors('oil')
-temperatura_eng = str(sensors('temperature'))
+
 
 with sr.Microphone() as s:
         engine.say(oi)
