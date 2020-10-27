@@ -18,7 +18,6 @@ import {
   Detail,
   Subtitle,
   Description,
-  SensorText,
   PossibleSolutions,
   ListItem,
   ListBullet,

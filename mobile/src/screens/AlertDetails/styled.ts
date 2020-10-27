@@ -49,13 +49,6 @@ export const Description = styled.Text`
   font-size: ${theme.font.size.semiregular}px;
 `;
 
-export const SensorText = styled.Text`
-  margin-top: 5px;
-  color: ${theme.colors.error};
-  font-family: ${theme.font.weight.bold};
-  font-size: ${theme.font.size.semiregular}px;
-`;
-
 export const PossibleSolutions = styled.View`
   flex: 1;
   padding: 5px 10px 0px;
