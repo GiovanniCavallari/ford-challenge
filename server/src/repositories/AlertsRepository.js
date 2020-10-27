@@ -5,7 +5,7 @@ import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 async function getAlertsByCarChassis(chassis) {
   try {
     const result = await Alert.findAll({
-      attributes: ['id', 'title', 'description', 'sensor', 'carChassis', 'createdAt'],
+      attributes: ['id', 'title', 'description', 'sensor', 'opened', 'carChassis', 'createdAt'],
       where: { carChassis: chassis },
       order: [['id', 'DESC']],
     });
@@ -30,7 +30,7 @@ async function getAlertsByCarChassis(chassis) {
 async function getAlertById(id) {
   try {
     const result = await Alert.findOne({
-      attributes: ['id', 'title', 'description', 'sensor', 'carChassis', 'createdAt'],
+      attributes: ['id', 'title', 'description', 'sensor', 'opened', 'carChassis', 'createdAt'],
       where: { id },
     });
 

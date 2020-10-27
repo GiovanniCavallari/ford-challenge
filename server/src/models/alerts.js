@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     sensor: {
       type: DataTypes.STRING,
     },
+    opened: {
+      type: DataTypes.BOOLEAN,
+    },
     carChassis: {
       type: DataTypes.INTEGER,
     },
