@@ -1,10 +1,11 @@
 import { Alert } from '../models';
 import { formatDateAndHour } from '../utils/formatDate';
+import { sensorNameTranslations } from '../utils/sensorNameTranslations';
 
 async function getAlertsByCarChassis(chassis) {
   try {
     const result = await Alert.findAll({
-      attributes: ['id', 'type', 'description', 'carChassis', 'createdAt'],
+      attributes: ['id', 'title', 'description', 'sensor', 'opened', 'carChassis', 'createdAt'],
       where: { carChassis: chassis },
       order: [['id', 'DESC']],
     });
@@ -13,11 +14,32 @@ async function getAlertsByCarChassis(chassis) {
       const serializedAlert = {
         ...alert.dataValues,
         date: formatDateAndHour(alert.createdAt),
+        translation: sensorNameTranslations[alert.sensor],
       };
 
       delete serializedAlert.createdAt;
       return serializedAlert;
     });
+
+    return alerts;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function getAlertById(id) {
+  try {
+    const result = await Alert.findOne({
+      attributes: ['id', 'title', 'description', 'sensor', 'opened', 'carChassis', 'createdAt'],
+      where: { id },
+    });
+
+    const alerts = {
+      ...result.dataValues,
+      date: formatDateAndHour(result.createdAt),
+      translation: sensorNameTranslations[result.sensor],
+    };
+    delete alerts.createdAt;
 
     return alerts;
   } catch (error) {
@@ -34,7 +56,19 @@ async function createAlert(data) {
   }
 }
 
+async function updateAlertOpenedStatus(id, opened) {
+  try {
+    await Alert.update({ opened }, { where: { id } });
+    const alert = await getAlertById(id);
+    return alert;
+  } catch (error) {
+    return false;
+  }
+}
+
 export default {
   getAlertsByCarChassis,
+  getAlertById,
   createAlert,
+  updateAlertOpenedStatus,
 };

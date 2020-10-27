@@ -4,7 +4,7 @@ module.exports = {
   development: {
     url: 'http://localhost',
     port: 3333,
-    apiVersion: '0.1.0',
+    apiVersion: '1.0.0',
     database: {
       pgrDb: 'fordva',
       pgrPort: 15432,

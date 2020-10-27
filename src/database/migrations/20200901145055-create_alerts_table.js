@@ -7,13 +7,22 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER,
       },
-      type: {
+      title: {
         allowNull: false,
         type: Sequelize.STRING,
       },
       description: {
         allowNull: false,
         type: Sequelize.STRING,
+      },
+      sensor: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      opened: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
