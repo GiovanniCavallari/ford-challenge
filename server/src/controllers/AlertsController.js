@@ -78,4 +78,32 @@ async function create(request, response) {
   return response.status(201).json(newAlert);
 }
 
-export default { index, show, create };
+async function update(request, response) {
+  const { id, chassis } = request.params;
+  const { opened } = request.body;
+
+  if (typeof opened !== 'boolean') {
+    const message = 'Invalid type for opened';
+    return errorResponse(response, 400, message);
+  }
+
+  const car = await CarsRepository.getCarByChassis(chassis);
+
+  if (!car) {
+    const message = `Car with chassis ${chassis} not found`;
+    return errorResponse(response, 404, message);
+  }
+
+  const alert = await AlertsRepository.updateAlertOpenedStatus(id, opened);
+
+  if (!alert) {
+    const message = `Alert with id ${id} not found`;
+    return errorResponse(response, 404, message);
+  }
+
+  const solutions = await SolutionsRepository.getSolutionsBySensorName(alert.sensor);
+
+  return response.json({ ...alert, solutions });
+}
+
+export default { index, show, create, update };

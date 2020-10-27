@@ -209,6 +209,46 @@ routes.post('/cars/:chassis/alerts', AlertsController.create);
 
 /**
  * @swagger
+ * /cars/{chassis}/alerts/{id}:
+ *  patch:
+ *    tags:
+ *      - Alerts
+ *    description: Update alert opened status
+ *    consumes:
+ *      - application/json
+ *    parameters:
+ *       - name: chassis
+ *         description: Chassis to identify car
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: id
+ *         description: Id to identify alert
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: body
+ *         description: Request body
+ *         in: body
+ *         schema:
+ *           type: object
+ *           properties:
+ *             opened:
+ *               type: boolean
+ *         required:
+ *           - opened
+ *    responses:
+ *      '201':
+ *        description: Successful response
+ *      '400':
+ *        description: Invalid type for "opened"
+ *      '404':
+ *        description: Car or Alert not found
+ */
+routes.patch('/cars/:chassis/alerts/:id', AlertsController.update);
+
+/**
+ * @swagger
  * /configurations/{id}:
  *  patch:
  *    tags:

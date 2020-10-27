@@ -56,8 +56,19 @@ async function createAlert(data) {
   }
 }
 
+async function updateAlertOpenedStatus(id, opened) {
+  try {
+    await Alert.update({ opened }, { where: { id } });
+    const alert = await getAlertById(id);
+    return alert;
+  } catch (error) {
+    return false;
+  }
+}
+
 export default {
   getAlertsByCarChassis,
   getAlertById,
   createAlert,
+  updateAlertOpenedStatus,
 };
