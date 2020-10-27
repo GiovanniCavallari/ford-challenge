@@ -3,6 +3,7 @@ export interface IAlert {
   date: string;
   title: string;
   sensor: string;
+  opened: boolean;
   translation: string;
   description: string;
   solutions: string[];

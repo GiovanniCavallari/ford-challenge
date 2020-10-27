@@ -36,6 +36,7 @@ const AlertDetails: React.FC = () => {
     date: '',
     title: '',
     sensor: '',
+    opened: true,
     translation: '',
     description: '',
     carChassis: 0,
@@ -45,10 +46,15 @@ const AlertDetails: React.FC = () => {
   const route = useRoute();
   const routeParams = route.params as RouteParams;
 
-  const getAlert = useCallback(() => {
-    api.get(`/cars/${routeParams.chassis}/alerts/${routeParams.id}`).then((response) => {
-      setAlert(response.data);
-    });
+  const getAlert = useCallback(async () => {
+    const response = await api.get(`/cars/${routeParams.chassis}/alerts/${routeParams.id}`);
+    setAlert(response.data);
+
+    if (!response.data.opened) {
+      await api.patch(`/cars/${routeParams.chassis}/alerts/${routeParams.id}`, {
+        opened: true,
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -63,15 +69,9 @@ const AlertDetails: React.FC = () => {
         <Content>
           <Main>
             <LabelsContainer>
-              <Label notification={true} opened={false}>
-                Novo
-              </Label>
-              <Label notification={false} opened={true}>
-                #{alert.id}
-              </Label>
-              <Label notification={false} opened={true}>
-                {alert.translation}
-              </Label>
+              {!alert.opened && <Label notification={true}>Novo</Label>}
+              <Label notification={false}>#{alert.id}</Label>
+              <Label notification={false}>{alert.translation}</Label>
             </LabelsContainer>
 
             <Title>{alert.title}</Title>

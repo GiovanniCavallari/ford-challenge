@@ -18,26 +18,21 @@ interface Props {
   id?: number;
   title: string;
   footer: string;
-  footerAlign?: 'left' | 'right';
   labels: boolean;
-  sensor: string;
+  sensor?: string;
+  footerAlign?: 'left' | 'right';
+  notification?: boolean;
   onPress?: () => void;
 }
 
-const Card: React.FC<Props> = ({ id, title, children, footer, footerAlign, labels, sensor, onPress }) => {
+const Card: React.FC<Props> = ({ id, title, children, footer, labels, sensor, footerAlign, notification, onPress }) => {
   const component = () => (
     <>
       {labels && (
         <LabelsContainer>
-          <Label notification={true} opened={false}>
-            Novo
-          </Label>
-          <Label notification={false} opened={true}>
-            #{id}
-          </Label>
-          <Label notification={false} opened={true}>
-            {sensor}
-          </Label>
+          {!notification && <Label notification={true}>Novo</Label>}
+          <Label notification={false}>#{id}</Label>
+          <Label notification={false}>{sensor}</Label>
         </LabelsContainer>
       )}
 

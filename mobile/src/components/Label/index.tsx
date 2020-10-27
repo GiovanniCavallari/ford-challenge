@@ -3,14 +3,13 @@ import React from 'react';
 import { Container, Text } from './styled';
 
 interface Props {
-  opened: boolean;
   notification: boolean;
 }
 
-const Label: React.FC<Props> = ({ children, opened, notification }) => {
+const Label: React.FC<Props> = ({ children, notification }) => {
   return (
-    <Container notification={notification} opened={opened}>
-      <Text notification={notification} opened={opened}>
+    <Container notification={notification}>
+      <Text notification={notification}>
         {children}
       </Text>
     </Container>

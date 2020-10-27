@@ -55,6 +55,7 @@ const Alerts: React.FC = () => {
                 footerAlign="right"
                 labels={true}
                 sensor={item.translation}
+                notification={item.opened}
                 onPress={() => handleAlertToDetails(item.id, item.carChassis)}
               >
                 {item.description}
