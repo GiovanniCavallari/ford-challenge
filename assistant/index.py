@@ -42,11 +42,10 @@ def combustivel(fala):
 
 
 def oleoMotor(fala):
-    # - Checar na API nivel do óleo
-    if(sensors('oil')):
-        engine.say('A pressão do óleo está ok! Algo mais?')
-    else:
+    if sensors('oil'):
         engine.say('A pressão do óleo está baixa, favor verificar! Algo mais?')
+    else:
+        engine.say('A pressão do óleo ok! Algo mais?')
     engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)     
@@ -60,8 +59,10 @@ def oleoMotor(fala):
 
 def freio(fala):
     # - Checar na API nivel do óleo
-    engine.say('Cuidado! Você precisa trocar a pastilha do freio! Agende a troca assim que possível.')
-    engine.say(' Posso ajudar em algo mais?')
+    if sensors('brake'):
+        engine.say('A pastilha de freio está muito desgastada, favor verificar! Algo mais?')
+    else:
+        engine.say('A pastilha de freio está ok! Algo mais?')
     engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)     
@@ -116,7 +117,6 @@ with sr.Microphone() as s:
                 elif 'óleo' in speech:
                     oleoMotor(speech)
 
-                #elif 
                 elif 'freio' in speech:
                     freio(speech)
 
