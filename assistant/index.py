@@ -15,10 +15,12 @@ engine.setProperty('rate', speech_rate+63) #aumenta em +65
 
 def consumir_fila():
     #integrar com o rabbitmq
-    
+    return
+
 
 def reconhecimento():
     #Reconhecer a voz de resposta para o alerta vindo do bot pela fila(?)
+    return
 
 
 threadReconhecimento = threading.Thread(targed=reconhecimento)
@@ -58,9 +60,8 @@ def oleoMotor(fala):
 
 
 def freio(fala):
-    # - Checar na API nivel do óleo
     if sensors('brake'):
-        engine.say('A pastilha de freio está muito desgastada, favor verificar! Algo mais?')
+        engine.say('A pastilha de freio está desgastada, favor verificar! Algo mais')
     else:
         engine.say('A pastilha de freio está ok! Algo mais?')
     engine.runAndWait()
@@ -75,7 +76,7 @@ def freio(fala):
 
 def temperatura(fala):
 
-    engine.say('O motor esta à ' + temperatura_eng + ' graus celsius. Deseja verificar mais alguma coisa?')
+    engine.say('O motor esta à ' + str(sensors('temperature')) + ' graus celsius. Deseja verificar mais alguma coisa?')
     engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)
@@ -93,9 +94,7 @@ def sensors(req):
 
 base = 'https://fordva-aylrs.ondigitalocean.app/cars/123456/sensors/'
 oi = 'Oi, sou a Fordina! Como posso ajudar?'
-#porcento_combustivel = str(sensors('fuel'))
-#nivelOleo = sensors('oil')
-temperatura_eng = str(sensors('temperature'))
+
 
 with sr.Microphone() as s:
         engine.say(oi)
