@@ -29,9 +29,8 @@ def combustivel(fala):
 
 
 def oleoMotor(fala):
-    # - Checar na API nivel do óleo
-    if(sensors('oil')):
-        engine.say('A pressão do óleo está baixa, favor verificar! Algo mais')
+    if sensors('oil') is True:
+        engine.say('A pressão do óleo está baixa, favor verificar! Algo mais?')
     else:
         engine.say('A pressão do óleo está ok! Algo mais?')
     engine.runAndWait()
@@ -46,7 +45,7 @@ def oleoMotor(fala):
 
 
 def freio(fala):
-    if(sensors('brake')):
+    if sensors('brake') is True:
         engine.say('A pastilha de freio está desgastada, favor verificar! Algo mais')
     else:
         engine.say('A pastilha de freio está ok! Algo mais?')
