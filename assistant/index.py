@@ -2,6 +2,9 @@ import speech_recognition as sr
 import pyttsx3
 import requests
 import threading
+import pika
+import time
+import json
 
 #Configurações
 r = sr.Recognizer() #Cria uma nova instância de Recognizer, que representa uma coleção de configurações e funcionalidades de reconhecimento de fala
@@ -17,13 +20,9 @@ def consumir_fila():
     def callback(ch, method, properties, body):
         data = json.loads(body)
         if format(data['error']) == 'True': #Aparentemente a função recupera todos os valores como string.
-            print(format(data['name']))
+            reconhecimento(format(data['name']))
             #Quando tem erro pode retornar qualquer dado baseado na estrutura de exemplo abaixo
-            #{"name": "fuel", "value": 80, "translation": "Combust\xc3\xadvel", "error": false, "carChassis": 123456,
-            # "solutions": [], "configurations": {"unit": "%", "value": "5", "active": true, "direction": "decreasing"}}
-        else:
-            print('sem erros!')
-            #Quando não tem erro podemos até ignorar este else
+            #{"name": "fuel", "value": 80, "translation": "Combust\\\\xc3\\\\xadvel", "error": false, "carChassis": 123456, "solutions": [], "configurations": {"unit": "%", "value": "5", "active": true, "direction": "decreasing"}}
         time.sleep(1) #Trata uma mensagem de cada vez no intervalo de 1 segundo
         ch.basic_ack(delivery_tag=method.delivery_tag) #Realiza o manual_ack da 1 mensagen recebida
 
