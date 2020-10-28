@@ -16,7 +16,7 @@ engine.setProperty('rate', speech_rate+63) #aumenta em +65
 def consumir_fila():
     def callback(ch, method, properties, body):
         data = json.loads(body)
-        if format(data['error']) == 'True':
+        if format(data['error']) == 'True': #Aparentemente a função recupera todos os valores como string.
             print(format(data['name']))
             #Quando tem erro pode retornar qualquer dado baseado na estrutura de exemplo abaixo
             #{"name": "fuel", "value": 80, "translation": "Combust\xc3\xadvel", "error": false, "carChassis": 123456,
