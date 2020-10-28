@@ -14,7 +14,28 @@ engine.setProperty('rate', speech_rate+63) #aumenta em +65
 #Taxa de fala em palavras por minuto. O padrão é 200 palavras por minuto.
 
 def consumir_fila():
-    #integrar com o rabbitmq
+    def callback(ch, method, properties, body):
+        data = json.loads(body)
+        if format(data['error']) == 'True':
+            print(format(data['name']))
+            #Quando tem erro pode retornar qualquer dado baseado na estrutura de exemplo abaixo
+            #{"name": "fuel", "value": 80, "translation": "Combust\xc3\xadvel", "error": false, "carChassis": 123456,
+            # "solutions": [], "configurations": {"unit": "%", "value": "5", "active": true, "direction": "decreasing"}}
+        else:
+            print('sem erros!')
+            #Quando não tem erro podemos até ignorar este else
+        time.sleep(1) #Trata uma mensagem de cada vez no intervalo de 1 segundo
+        ch.basic_ack(delivery_tag=method.delivery_tag) #Realiza o manual_ack da 1 mensagen recebida
+
+    connection = pika.BlockingConnection(pika.URLParameters('amqp://rabbitmq:rabbitmq@165.227.86.15:5672'))
+
+    channel = connection.channel()
+    channel.basic_qos(prefetch_count=1) #Recupera 1 mensagens de cada vez
+    channel.queue_declare(queue='messages', durable=True)
+
+    channel.basic_consume(queue='messages', on_message_callback=callback, auto_ack=False)
+
+    channel.start_consuming()
     return
 
 
