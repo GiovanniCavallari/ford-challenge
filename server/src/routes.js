@@ -177,6 +177,8 @@ routes.get('/cars/:chassis/alerts/:id', AlertsController.show);
  *         schema:
  *           type: object
  *           properties:
+ *             id:
+ *               type: number
  *             title:
  *               type: string
  *             description:
@@ -191,6 +193,7 @@ routes.get('/cars/:chassis/alerts/:id', AlertsController.show);
  *                 body:
  *                   type: string
  *         required:
+ *           - id
  *           - title
  *           - description
  *           - sensor
@@ -203,7 +206,7 @@ routes.get('/cars/:chassis/alerts/:id', AlertsController.show);
  *      '404':
  *        description: Car not found
  *      '500':
- *        description: Internal Server Error
+ *        description: Error to create alert or error to update sensors
  */
 routes.post('/cars/:chassis/alerts', AlertsController.create);
 

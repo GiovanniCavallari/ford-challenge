@@ -11,6 +11,7 @@ async function producer(page = 0) {
     const solutions = await SolutionsRepository.getSolutionsBySensorName(sensor.name);
 
     const queueMessage = {
+      id: dbPage,
       name: sensor.name,
       value: sensor.value,
       translation: sensor.translation,

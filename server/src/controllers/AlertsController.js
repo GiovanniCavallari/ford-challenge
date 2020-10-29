@@ -1,6 +1,7 @@
 import ExpoServer from '../lib/ExpoServer';
 import CarsRepository from '../repositories/CarsRepository';
 import AlertsRepository from '../repositories/AlertsRepository';
+import SensorsRepository from '../repositories/SensorsRepository';
 import SolutionsRepository from '../repositories/SolutionsRepository';
 import errorResponse from '../utils/errorResponse';
 import { validateSensorName } from '../utils/validateSensor';
@@ -43,6 +44,7 @@ async function show(request, response) {
 async function create(request, response) {
   const { chassis } = request.params;
   const {
+    id,
     title,
     description,
     sensor,
@@ -54,8 +56,8 @@ async function create(request, response) {
     return errorResponse(response, 400, message);
   }
 
-  if (typeof title !== 'string' || typeof description !== 'string') {
-    const message = 'Invalid type for title or description';
+  if (typeof id !== 'number' || typeof title !== 'string' || typeof description !== 'string') {
+    const message = 'Invalid type for id, title or description';
     return errorResponse(response, 400, message);
   }
 
@@ -66,11 +68,19 @@ async function create(request, response) {
     return errorResponse(response, 404, message);
   }
 
+  const sensorsData = await SensorsRepository.getSensorsById(id);
+  const updateSensors = await SensorsRepository.updateSensors(id, sensorsData);
+
+  if (!updateSensors) {
+    const message = `Error to update sensors`;
+    return errorResponse(response, 500, message);
+  }
+
   const data = { title, description, sensor, carChassis: chassis };
   const newAlert = await AlertsRepository.createAlert(data);
 
   if (!newAlert) {
-    const message = `Internal Server Error`;
+    const message = `Error to create alert`;
     return errorResponse(response, 500, message);
   }
 
