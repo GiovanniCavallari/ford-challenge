@@ -44,7 +44,6 @@ async function show(request, response) {
 async function create(request, response) {
   const { chassis } = request.params;
   const {
-    id,
     title,
     description,
     sensor,
@@ -56,7 +55,7 @@ async function create(request, response) {
     return errorResponse(response, 400, message);
   }
 
-  if (typeof id !== 'number' || typeof title !== 'string' || typeof description !== 'string') {
+  if (typeof title !== 'string' || typeof description !== 'string') {
     const message = 'Invalid type for id, title or description';
     return errorResponse(response, 400, message);
   }
@@ -66,14 +65,6 @@ async function create(request, response) {
   if (!car) {
     const message = `Car with chassis ${chassis} not found`;
     return errorResponse(response, 404, message);
-  }
-
-  const sensorsData = await SensorsRepository.getSensorsById(id);
-  const updateSensors = await SensorsRepository.updateSensors(id, sensorsData);
-
-  if (!updateSensors) {
-    const message = `Error to update sensors`;
-    return errorResponse(response, 500, message);
   }
 
   const data = { title, description, sensor, carChassis: chassis };

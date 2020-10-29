@@ -77,9 +77,9 @@ async function createSensor(data) {
   }
 }
 
-async function updateSensors(id, data) {
+async function updateApiSensorsLine(data) {
   try {
-    await Sensor.update(data, { where: { id } });
+    await Sensor.update(data, { where: { id: 1 } });
     return true;
   } catch (error) {
     return false;
@@ -92,5 +92,5 @@ export default {
   getSensorsByName,
   getSensorsById,
   createSensor,
-  updateSensors,
+  updateApiSensorsLine,
 };
