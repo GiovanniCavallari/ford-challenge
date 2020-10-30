@@ -122,8 +122,8 @@ def interacao():
         audio = r.listen(s, 3, 7)
         speech = r.recognize_google(audio, language='pt')
         if 'não' in speech:
-            # continuar = 0
             speech = 0
+            escutar = 0
             engine.say('Ta bom, pode contar comigo sempre que precisar!')
             engine.runAndWait()
             return speech
@@ -140,6 +140,7 @@ def interacao():
         speech = r.recognize_google(audio, language='pt')
         if 'não' in speech:
             speech = 0
+            escutar = 0
             engine.say('Ta bom, pode contar comigo sempre que precisar')
             engine.runAndWait()
             return speech
@@ -156,6 +157,7 @@ def interacao():
         speech = r.recognize_google(audio, language='pt')
         if 'não' in speech:
             speech = 0
+            escutar = 0
             engine.say('Ta bom, pode contar comigo sempre que precisar')
             engine.runAndWait()
             return speech
@@ -168,6 +170,7 @@ def interacao():
         speech = r.recognize_google(audio, language='pt')
         if 'não' in speech:
             speech = 0
+            escutar = 0
             engine.say('Ta bom, pode contar comigo sempre que precisar!')
             engine.runAndWait()
             return speech
@@ -187,7 +190,7 @@ def interacao():
                 speech = r.recognize_google(audio, language='pt')
                 print(speech)
 
-                if 'fordina' in speech or 'Ford' in speech:
+                if 'Ford' in speech:
                     escutar = 1
                     engine.say(oi)
                     engine.runAndWait()
