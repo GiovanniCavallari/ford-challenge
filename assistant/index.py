@@ -22,9 +22,8 @@ def consumirFila():
 
     def alerts(title, desc, sensor):
         try:
-            print(title, desc, sensor)
-            #payload = {"title": title,"description": desc,"sensor": sensor,"notification": {"title": title,"body": desc}}
-            #requests.post('https://fordva-aylrs.ondigitalocean.app/cars/123456/alerts', json=payload)
+            payload = {"title": title,"description": desc,"sensor": sensor,"notification": {"title": title,"body": desc}}
+            requests.post('https://fordva-aylrs.ondigitalocean.app/cars/123456/alerts', json=payload)
         except ValueError:
             print("Erro ao enviar alerta para API")
 
