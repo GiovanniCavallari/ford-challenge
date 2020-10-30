@@ -28,47 +28,48 @@ def consumirFila():
             print("Erro ao enviar alerta para API")
         return
 
-    def tratamento(name, value):
-        if name == "fuel":
-            alerts("Alerta de Gasolina", "O tanque tem " + value + "% de combustível.", name)
-            engine.say('ATENÇÃO, á' + value + 'porcento de combustível. Abasteça no posto mais próximo.')
-        elif name == "odometer":
-            alerts("Alerta de Odômetro", "O carro já andou " + value + " Km.", name)
-            engine.say('ATENÇÃO, o carro já andou' + value + ' quilometros.')
-        elif name == "oil":
-            alerts("Alerta de Óleo", "A pressão do óleo está baixa.", name)
-            engine.say('ATENÇÃO, a pressão do óleo está baixa.')
-        elif name == "brake":
-            alerts("Alerta de Freio", "A pastilha de freio está desgastada.", name)
-            engine.say('ATENÇÃO, a pastilha de freio está muito desgastada.')
-        elif name == "temperature":
-            alerts("Alerta de Temperatura", "O motor está á " + value + "°C.", name)
-            engine.say('ATENÇÃO, a temperatura do motor está á' + value + ' graus celcios.')
-        elif name == "rfTirePressure":
-            alerts("Alerta de Pressão dos Pneus", "O pneu dianteiro direito está á" + value + "PSI.", name)
-            engine.say('ATENÇÃO, a pressão do pneu dianteiro direito está á' + value + ' P S I.')
-        elif name == "lfTirePressure":
-            alerts("Alerta de Pressão dos Pneus", "O pneu esquerdo direito está á" + value + "PSI.", name)
-            engine.say('ATENÇÃO, a pressão do pneu dianteiro esquerdo está á' + value + ' P S I.')
-        elif name == "rrTirePressure":
-            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro direito está á" + value + "PSI.", name)
-            engine.say('ATENÇÃO, a pressão do pneu traseiro direito está á' + value + ' P S I.')
-        elif name == "rlTirePressure":
-            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro esquerdo está á" + value + "PSI.", name)
-            engine.say('ATENÇÃO, a pressão do pneu traseiro esquerdo está á' + value + ' P S I.')
-        elif name == "rfTireTemp":
-            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro direito está á" + value + "°C.", name)
-            engine.say('ATENÇÃO, a temperatura do pneu dianteiro direito está á' + value + ' graus celcios.')
-        elif name == "lfTireTemp":
-            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro esquerdo está á" + value + "°C.", name)
-            engine.say('ATENÇÃO, a temperatura do pneu dianteiro esquerdo está á' + value + ' graus celcios.')
-        elif name == "rrTireTemp":
-            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro direito está á" + value + "°C.", name)
-            engine.say('ATENÇÃO, a temperatura do pneu traseiro direito está á' + value + ' graus celcios.')
-        elif name == "rlTireTemp":
-            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + value + "°C.", name)
-            engine.say('ATENÇÃO, a temperatura do pneu traseiro esquerdo está á' + value + ' graus celcios.')
-        x = engine.runAndWait()
+    def tratamento(nome, valor):
+        if nome == "fuel":
+            alerts("Alerta de Gasolina", "O tanque tem " + valor + "% de combustível.", nome)
+            frase = 'ATENÇÃO, á' + valor + 'porcento de combustível. Abasteça no posto mais próximo.'
+        elif nome == "odometer":
+            alerts("Alerta de Odômetro", "O carro já andou " + valor + " Km.", nome)
+            frase = 'Atenção, o carro já andou' + valor + ' quilometros.'
+        elif nome == "oil":
+            alerts("Alerta de Óleo", "A pressão do óleo está baixa.", nome)
+            frase = 'ATENÇÃO, a pressão do óleo está baixa.'
+        elif nome == "brake":
+            alerts("Alerta de Freio", "A pastilha de freio está desgastada.", nome)
+            frase = 'ATENÇÃO, a pastilha de freio está muito desgastada.'
+        elif nome == "temperature":
+            alerts("Alerta de Temperatura", "O motor está á " + valor + "°C.", nome)
+            frase = 'ATENÇÃO, a temperatura do motor está á' + valor + ' graus celcios.'
+        elif nome == "rfTirePressure":
+            alerts("Alerta de Pressão dos Pneus", "O pneu dianteiro direito está á" + valor + "PSI.", nome)
+            frase = 'ATENÇÃO, a pressão do pneu dianteiro direito está á' + valor + ' P S I.'
+        elif nome == "lfTirePressure":
+            alerts("Alerta de Pressão dos Pneus", "O pneu esquerdo direito está á" + valor + "PSI.", nome)
+            frase = 'ATENÇÃO, a pressão do pneu dianteiro esquerdo está á' + valor + ' P S I.'
+        elif nome == "rrTirePressure":
+            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro direito está á" + valor + "PSI.", nome)
+            frase = 'ATENÇÃO, a pressão do pneu traseiro direito está á' + valor + ' P S I.'
+        elif nome == "rlTirePressure":
+            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro esquerdo está á" + valor + "PSI.", nome)
+            frase = 'ATENÇÃO, a pressão do pneu traseiro esquerdo está á' + valor + ' P S I.'
+        elif nome == "rfTireTemp":
+            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro direito está á" + valor + "°C.", nome)
+            frase = 'ATENÇÃO, a temperatura do pneu dianteiro direito está á' + valor + ' graus celcios.'
+        elif nome == "lfTireTemp":
+            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro esquerdo está á" + valor + "°C.", nome)
+            frase = 'ATENÇÃO, a temperatura do pneu dianteiro esquerdo está á' + valor + ' graus celcios.'
+        elif nome == "rrTireTemp":
+            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro direito está á" + valor + "°C.", nome)
+            frase = 'ATENÇÃO, a temperatura do pneu traseiro direito está á' + valor + ' graus celcios.'
+        elif nome == "rlTireTemp":
+            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + valor + "°C.", nome)
+            frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á' + valor + ' graus celcios.'
+        engine.say(frase)
+        engine.runAndWait()
         return
 
     def callback(ch, method, properties, body):
