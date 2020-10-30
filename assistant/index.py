@@ -4,7 +4,7 @@ from assistant import interacao
 from consumirFila import consumirFila
 
 threadConsumirFila = threading.Thread(target=consumirFila)
-threadConsumirFila.daemon = False
+threadConsumirFila.daemon = True
 threadConsumirFila.start()
 
 interacao()

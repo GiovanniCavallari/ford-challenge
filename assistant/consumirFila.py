@@ -3,6 +3,7 @@ import requests
 import pika
 import time
 import json
+import os
 
 
 engine = pyttsx3.init()  # inicia a engine da lib
@@ -61,8 +62,8 @@ def consumirFila():
         elif nome == "rlTireTemp":
             alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á ' + valor + ' graus celcios.'
-        engine.say(frase)
-        engine.runAndWait()
+        
+        os.system('say ' + frase)
         return
 
     def callback(ch, method, properties, body):
@@ -82,4 +83,3 @@ def consumirFila():
     channel.queue_declare(queue='messages', durable=True)
     channel.basic_consume(queue='messages', on_message_callback=callback, auto_ack=False)
     channel.start_consuming()
-    
