@@ -1,5 +1,5 @@
 import speech_recognition as sr
-import pyttsx3
+import pyttsx3, requests
 
 # Configurações
 r = sr.Recognizer()  # Cria uma nova instância de Recognizer, que representa uma coleção de configurações e funcionalidades de reconhecimento de fala
