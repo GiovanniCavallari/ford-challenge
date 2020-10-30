@@ -21,10 +21,11 @@ engine.setProperty('rate', speech_rate+63)  # aumenta em +65
 def consumirFila():
     def alerts(title, desc, sensor):
         try:
-            payload = {"title": title, "description": desc, "sensor": sensor,"notification": {"title": title, "body": desc}}
+            payload = {"title": title,"description": desc,"sensor": sensor,"notification": {"title": title,"body": desc}}
             requests.post('https://fordva-aylrs.ondigitalocean.app/cars/123456/alerts', json=payload)
         except ValueError:
             print("Erro ao enviar alerta para API")
+
 
     def tratamento(name, value):
         if name == "fuel":
@@ -96,20 +97,18 @@ def consumirFila():
         data = json.loads(body)
         # Aparentemente a função recupera todos os valores como string.
         if format(data['error']) == 'True':
-            tratamento(format(data['name']), format(data['value']))
+            tratamento(format(data['name']), str(format(data['value'])))
             # Quando tem erro pode retornar qualquer dado baseado na estrutura de exemplo abaixo
             #{"name": "fuel", "value": 80, "translation": "Combustível", "error": false, "carChassis": 123456, "solutions": [], "configurations": {"unit": "%", "value": "5", "active": true, "direction": "decreasing"}}
         # Trata uma mensagem de cada vez no intervalo de 1 segundo
         time.sleep(1)
         # Realiza o manual_ack da 1 mensagen recebida
         ch.basic_ack(delivery_tag=method.delivery_tag)
-    connection = pika.BlockingConnection(pika.URLParameters(
-        'amqp://rabbitmq:rabbitmq@165.227.86.15:5672'))
+    connection = pika.BlockingConnection(pika.URLParameters('amqp://rabbitmq:rabbitmq@165.227.86.15:5672'))
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)  # Recupera 1 mensagens de cada vez
     channel.queue_declare(queue='messages', durable=True)
-    channel.basic_consume(
-        queue='messages', on_message_callback=callback, auto_ack=False)
+    channel.basic_consume(queue='messages', on_message_callback=callback, auto_ack=False)
     channel.start_consuming()
 
 
