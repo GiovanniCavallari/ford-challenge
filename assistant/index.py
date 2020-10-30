@@ -70,7 +70,7 @@ def consumirFila():
             frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á ' + valor + ' graus celcios.'
         engine.say(frase)
         engine.runAndWait()
-        return null
+        return
 
     def callback(ch, method, properties, body):
         data = json.loads(body)
