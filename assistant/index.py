@@ -10,9 +10,9 @@ import json
 r = sr.Recognizer()  # Cria uma nova instância de Recognizer, que representa uma coleção de configurações e funcionalidades de reconhecimento de fala
 engine = pyttsx3.init()  # inicia a engine da lib
 # caminho da voz para uma variavel
-br_voz_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_PT-BR_MARIA_11.0'
+# br_voz_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_PT-BR_MARIA_11.0'
 # muda a configura da voz para a da variavel acima
-engine.setProperty('voice', br_voz_id)
+# engine.setProperty('voice', br_voz_id)
 r.energy_threshold = 4000  # Representa o limite do nível de energia para sons. Valores abaixo desse limite são considerados silêncio e valores acima desse limite são considerados fala
 speech_rate = engine.getProperty('rate')  # pegando a propriedade 'rate'
 engine.setProperty('rate', speech_rate+63)  # aumenta em +65
@@ -68,6 +68,7 @@ def consumirFila():
         elif nome == "rlTireTemp":
             alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á ' + valor + ' graus celcios.'
+            
         engine.say(frase)
         engine.runAndWait()
         return null
@@ -80,6 +81,7 @@ def consumirFila():
             #{"name": "fuel", "value": 80, "translation": "Combustível", "error": false, "carChassis": 123456, "solutions": [], "configurations": {"unit": "%", "value": "5", "active": true, "direction": "decreasing"}}
         time.sleep(1)# Trata uma mensagem de cada vez no intervalo de 1 segundo
         ch.basic_ack(delivery_tag=method.delivery_tag)# Realiza o manual_ack da 1 mensagen recebida
+
     connection = pika.BlockingConnection(pika.URLParameters('amqp://rabbitmq:rabbitmq@165.227.86.15:5672'))
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)  # Recupera 1 mensagens de cada vez
