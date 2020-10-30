@@ -5,9 +5,9 @@ import pyttsx3, requests
 r = sr.Recognizer()  # Cria uma nova instância de Recognizer, que representa uma coleção de configurações e funcionalidades de reconhecimento de fala
 engine = pyttsx3.init()  # inicia a engine da lib
 # caminho da voz para uma variavel
-br_voz_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_PT-BR_MARIA_11.0'
+# br_voz_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_PT-BR_MARIA_11.0'
 # muda a configura da voz para a da variavel acima
-engine.setProperty('voice', br_voz_id)
+# engine.setProperty('voice', br_voz_id)
 r.energy_threshold = 4000  # Representa o limite do nível de energia para sons. Valores abaixo desse limite são considerados silêncio e valores acima desse limite são considerados fala
 speech_rate = engine.getProperty('rate')  # pegando a propriedade 'rate'
 engine.setProperty('rate', speech_rate+63)  # aumenta em +65
