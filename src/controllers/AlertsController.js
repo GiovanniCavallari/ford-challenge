@@ -1,6 +1,7 @@
 import ExpoServer from '../lib/ExpoServer';
 import CarsRepository from '../repositories/CarsRepository';
 import AlertsRepository from '../repositories/AlertsRepository';
+import SensorsRepository from '../repositories/SensorsRepository';
 import SolutionsRepository from '../repositories/SolutionsRepository';
 import errorResponse from '../utils/errorResponse';
 import { validateSensorName } from '../utils/validateSensor';
@@ -55,7 +56,7 @@ async function create(request, response) {
   }
 
   if (typeof title !== 'string' || typeof description !== 'string') {
-    const message = 'Invalid type for title or description';
+    const message = 'Invalid type for id, title or description';
     return errorResponse(response, 400, message);
   }
 
@@ -70,7 +71,7 @@ async function create(request, response) {
   const newAlert = await AlertsRepository.createAlert(data);
 
   if (!newAlert) {
-    const message = `Internal Server Error`;
+    const message = `Error to create alert`;
     return errorResponse(response, 500, message);
   }
 

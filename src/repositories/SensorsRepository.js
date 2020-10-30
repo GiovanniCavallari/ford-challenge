@@ -1,23 +1,25 @@
 import { Sensor } from '../models';
 
+const attributes = [
+  'fuel',
+  'odometer',
+  'oil',
+  'brake',
+  'temperature',
+  'rfTirePressure',
+  'lfTirePressure',
+  'rrTirePressure',
+  'rlTirePressure',
+  'rfTireTemp',
+  'lfTireTemp',
+  'rrTireTemp',
+  'rlTireTemp',
+];
+
 async function getSensorsByCarChassis(chassis) {
   try {
     const sensors = await Sensor.findAll({
-      attributes: [
-        'fuel',
-        'odometer',
-        'oil',
-        'brake',
-        'temperature',
-        'rfTirePressure',
-        'lfTirePressure',
-        'rrTirePressure',
-        'rlTirePressure',
-        'rfTireTemp',
-        'lfTireTemp',
-        'rrTireTemp',
-        'rlTireTemp',
-      ],
+      attributes,
       where: { carChassis: chassis },
       limit: 1,
     });
@@ -32,22 +34,7 @@ async function getAllSensors(page = 1) {
 
   try {
     const sensors = await Sensor.findAll({
-      attributes: [
-        'fuel',
-        'odometer',
-        'oil',
-        'brake',
-        'temperature',
-        'rfTirePressure',
-        'lfTirePressure',
-        'rrTirePressure',
-        'rlTirePressure',
-        'rfTireTemp',
-        'lfTireTemp',
-        'rrTireTemp',
-        'rlTireTemp',
-        'carChassis',
-      ],
+      attributes,
       offset,
       limit: 1,
     });
@@ -69,12 +56,32 @@ async function getSensorsByName(name, chassis) {
   }
 }
 
+async function getSensorsById(id) {
+  try {
+    const sensors = await Sensor.findOne({
+      attributes,
+      where: { id },
+    });
+    return sensors;
+  } catch (error) {
+    return false;
+  }
+}
+
 async function createSensor(data) {
   try {
     const result = await Sensor.create(data);
     return result;
   } catch (error) {
-    console.log(error);
+    return false;
+  }
+}
+
+async function updateApiSensorsLine(data) {
+  try {
+    await Sensor.update(data, { where: { id: 1 } });
+    return true;
+  } catch (error) {
     return false;
   }
 }
@@ -83,5 +90,7 @@ export default {
   getSensorsByCarChassis,
   getAllSensors,
   getSensorsByName,
+  getSensorsById,
   createSensor,
+  updateApiSensorsLine,
 };

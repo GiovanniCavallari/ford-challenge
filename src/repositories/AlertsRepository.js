@@ -34,14 +34,14 @@ async function getAlertById(id) {
       where: { id },
     });
 
-    const alerts = {
+    const alert = {
       ...result.dataValues,
       date: formatDateAndHour(result.createdAt),
       translation: sensorNameTranslations[result.sensor],
     };
-    delete alerts.createdAt;
+    delete alert.createdAt;
 
-    return alerts;
+    return alert;
   } catch (error) {
     return false;
   }

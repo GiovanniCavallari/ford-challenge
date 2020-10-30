@@ -1,11 +1,13 @@
 import Queue from './lib/Queue';
 import SolutionsRepository from './repositories/SolutionsRepository';
 import getQueueSensorsWithConfigs from './services/GetQueueSensorsWithConfigs';
+import updateQueueSensors from './services/UpdateQueueSensors';
 import waitToExecute from './utils/waitToExecute';
 
 async function producer(page = 0) {
   const dbPage = page + 1;
   const sensors = await getQueueSensorsWithConfigs(dbPage);
+  await updateQueueSensors(dbPage);
 
   for (const sensor of sensors) {
     const solutions = await SolutionsRepository.getSolutionsBySensorName(sensor.name);

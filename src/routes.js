@@ -203,7 +203,7 @@ routes.get('/cars/:chassis/alerts/:id', AlertsController.show);
  *      '404':
  *        description: Car not found
  *      '500':
- *        description: Internal Server Error
+ *        description: Error to create alert
  */
 routes.post('/cars/:chassis/alerts', AlertsController.create);
 
