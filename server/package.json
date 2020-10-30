@@ -6,7 +6,8 @@
   "scripts": {
     "build": "sucrase src/ -d build/ --transforms imports",
     "start": "node build/server.js",
-    "dev:start": "nodemon src/server.js",
+    "start:queue": "node build/queue.js",
+    "dev:start": "nodemon build/server.js",
     "dev:debug": "nodemon --exec 'node --inspect -r sucrase/register src/server.js'",
     "dev:queue": "nodemon src/queue.js",
     "db:run": "npm run migration:run && npm run seed:run",
