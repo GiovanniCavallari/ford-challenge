@@ -19,45 +19,97 @@ engine.setProperty('rate', speech_rate+63)  # aumenta em +65
 # Taxa de fala em palavras por minuto. O padrão é 200 palavras por minuto.
 
 def consumirFila():
-
     def alerts(title, desc, sensor):
         try:
-            payload = {"title": title, "description": desc, "sensor": sensor,
-                    "notification": {"title": title, "body": desc}}
-            requests.post(
-                'https://fordva-aylrs.ondigitalocean.app/cars/123456/alerts', json=payload)
+            payload = {"title": title, "description": desc, "sensor": sensor,"notification": {"title": title, "body": desc}}
+            requests.post('https://fordva-aylrs.ondigitalocean.app/cars/123456/alerts', json=payload)
         except ValueError:
             print("Erro ao enviar alerta para API")
 
-    def tratamento(name, value, translation):
-        if (name == "fuel"):
-            engine.say('ATENÇÃO, há' + str(value) +
-                       'porcento de combustível. Abasteça no posto mais próximo.' + translation)
+    def tratamento(name, value):
+        if name == "fuel":
+            engine.say('ATENÇÃO, á' + value + 'porcento de combustível. Abasteça no posto mais próximo.')
             engine.runAndWait()
+            alerts("Alerta de Gasolina", "O tanque tem " + value + "% de combustível.", name)
+
+        elif name == "odometer":
+            engine.say('ATENÇÃO, o carro já andou' + value + ' quilometros.')
+            engine.runAndWait()
+            alerts("Alerta de Odômetro", "O carro já andou " + value + " Km.", name)
+
+        elif name == "oil":
+            engine.say('ATENÇÃO, a pressão do óleo está baixa.')
+            engine.runAndWait()
+            alerts("Alerta de Óleo", "A pressão do óleo está baixa.", name)
+
+        elif name == "brake":
+            engine.say('ATENÇÃO, a pastilha de freio está muito desgastada.')
+            engine.runAndWait()
+            alerts("Alerta de Freio", "A pastilha de freio está desgastada.", name)
+
+        elif name == "temperature":
+            engine.say('ATENÇÃO, a temperatura do motor está á' + value + ' graus celcios.')
+            engine.runAndWait()
+            alerts("Alerta de Temperatura", "O motor está á " + value + "°C.", name)
+
+        elif name == "rfTirePressure":
+            engine.say('ATENÇÃO, a pressão do pneu dianteiro direito está á' + value + ' P S I.')
+            engine.runAndWait()
+            alerts("Alerta de Pressão dos Pneus", "O pneu dianteiro direito está á" + value + "PSI.", name)
+
+        elif name == "lfTirePressure":
+            engine.say('ATENÇÃO, a pressão do pneu dianteiro esquerdo está á' + value + ' P S I.')
+            engine.runAndWait()
+            alerts("Alerta de Pressão dos Pneus", "O pneu esquerdo direito está á" + value + "PSI.", name)
+
+        elif name == "rrTirePressure":
+            engine.say('ATENÇÃO, a pressão do pneu traseiro direito está á' + value + ' P S I.')
+            engine.runAndWait()
+            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro direito está á" + value + "PSI.", name)
+
+        elif name == "rlTirePressure":
+            engine.say('ATENÇÃO, a pressão do pneu traseiro esquerdo está á' + value + ' P S I.')
+            engine.runAndWait()
+            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro esquerdo está á" + value + "PSI.", name)
+
+        elif name == "rfTireTemp":
+            engine.say('ATENÇÃO, a temperatura do pneu dianteiro direito está á' + value + ' graus celcios.')
+            engine.runAndWait()
+            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro direito está á" + value + "°C.", name)
+
+        elif name == "lfTireTemp":
+            engine.say('ATENÇÃO, a temperatura do pneu dianteiro esquerdo está á' + value + ' graus celcios.')
+            engine.runAndWait()
+            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro esquerdo está á" + value + "°C.", name)
+
+        elif name == "rrTireTemp":
+            engine.say('ATENÇÃO, a temperatura do pneu traseiro direito está á' + value + ' graus celcios.')
+            engine.runAndWait()
+            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro direito está á" + value + "°C.", name)
+
+        elif name == "rlTireTemp":
+            engine.say('ATENÇÃO, a temperatura do pneu traseiro esquerdo está á' + value + ' graus celcios.')
+            engine.runAndWait()
+            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + value + "°C.", name)
 
     def callback(ch, method, properties, body):
         data = json.loads(body)
         # Aparentemente a função recupera todos os valores como string.
         if format(data['error']) == 'True':
-            tratamento(format(data['name']), format(
-                data['value']), format(data['translation']))
+            tratamento(format(data['name']), format(data['value']))
             # Quando tem erro pode retornar qualquer dado baseado na estrutura de exemplo abaixo
             #{"name": "fuel", "value": 80, "translation": "Combustível", "error": false, "carChassis": 123456, "solutions": [], "configurations": {"unit": "%", "value": "5", "active": true, "direction": "decreasing"}}
         # Trata uma mensagem de cada vez no intervalo de 1 segundo
         time.sleep(1)
         # Realiza o manual_ack da 1 mensagen recebida
         ch.basic_ack(delivery_tag=method.delivery_tag)
-
     connection = pika.BlockingConnection(pika.URLParameters(
         'amqp://rabbitmq:rabbitmq@165.227.86.15:5672'))
-
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)  # Recupera 1 mensagens de cada vez
     channel.queue_declare(queue='messages', durable=True)
-
     channel.basic_consume(
         queue='messages', on_message_callback=callback, auto_ack=False)
-
     channel.start_consuming()
 
 
@@ -78,8 +130,8 @@ def interacao():
 
     def oleoMotor(fala):
         if sensors('oil'):
-            engine.say(
-                'A pressão do óleo está baixa, favor verificar! Algo mais?')
+            engine.say('A pressão do óleo está baixa, favor verificar! Algo mais?')
+            engine.runAndWait()
         else:
             engine.say('A pressão do óleo ok! Algo mais?')
         engine.runAndWait()
@@ -94,11 +146,11 @@ def interacao():
 
     def freio(fala):
         if sensors('brake'):
-            engine.say(
-                'A pastilha de freio está desgastada, favor verificar! Algo mais')
+            engine.say('A pastilha de freio está desgastada, favor verificar! Algo mais')
+            engine.runAndWait()
         else:
             engine.say('A pastilha de freio está ok! Algo mais?')
-        engine.runAndWait()
+            engine.runAndWait()
         speech = 0
         audio = r.listen(s, 3, 7)
         speech = r.recognize_google(audio, language='pt')
@@ -109,8 +161,7 @@ def interacao():
             return speech
 
     def temperatura(fala):
-        engine.say('O motor esta à ' + str(sensors('temperature')) +
-                   ' graus celsius. Deseja verificar mais alguma coisa?')
+        engine.say('O motor esta à ' + str(sensors('temperature')) + ' graus celsius. Deseja verificar mais alguma coisa?')
         engine.runAndWait()
         speech = 0
         audio = r.listen(s, 3, 7)
