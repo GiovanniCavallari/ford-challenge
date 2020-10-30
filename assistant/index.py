@@ -19,6 +19,7 @@ engine.setProperty('rate', speech_rate+63)  # aumenta em +65
 # Taxa de fala em palavras por minuto. O padrão é 200 palavras por minuto.
 
 def consumirFila():
+
     def alerts(title, desc, sensor):
         try:
             print(title, desc, sensor)
@@ -26,15 +27,14 @@ def consumirFila():
             #requests.post('https://fordva-aylrs.ondigitalocean.app/cars/123456/alerts', json=payload)
         except ValueError:
             print("Erro ao enviar alerta para API")
-        return
 
     def tratamento(nome, valor):
         if nome == "fuel":
             alerts("Alerta de Gasolina", "O tanque tem " + valor + "% de combustível.", nome)
-            frase = 'ATENÇÃO, á' + valor + 'porcento de combustível. Abasteça no posto mais próximo.'
+            frase = 'ATENÇÃO, á ' + valor + ' porcento de combustível. Abasteça no posto mais próximo.'
         elif nome == "odometer":
             alerts("Alerta de Odômetro", "O carro já andou " + valor + " Km.", nome)
-            frase = 'Atenção, o carro já andou' + valor + ' quilometros.'
+            frase = 'Atenção, o carro já andou ' + valor + ' quilometros.'
         elif nome == "oil":
             alerts("Alerta de Óleo", "A pressão do óleo está baixa.", nome)
             frase = 'ATENÇÃO, a pressão do óleo está baixa.'
@@ -43,34 +43,34 @@ def consumirFila():
             frase = 'ATENÇÃO, a pastilha de freio está muito desgastada.'
         elif nome == "temperature":
             alerts("Alerta de Temperatura", "O motor está á " + valor + "°C.", nome)
-            frase = 'ATENÇÃO, a temperatura do motor está á' + valor + ' graus celcios.'
+            frase = 'ATENÇÃO, a temperatura do motor está á ' + valor + ' graus celcios.'
         elif nome == "rfTirePressure":
             alerts("Alerta de Pressão dos Pneus", "O pneu dianteiro direito está á" + valor + "PSI.", nome)
-            frase = 'ATENÇÃO, a pressão do pneu dianteiro direito está á' + valor + ' P S I.'
+            frase = 'ATENÇÃO, a pressão do pneu dianteiro direito está á ' + valor + ' P S I.'
         elif nome == "lfTirePressure":
             alerts("Alerta de Pressão dos Pneus", "O pneu esquerdo direito está á" + valor + "PSI.", nome)
-            frase = 'ATENÇÃO, a pressão do pneu dianteiro esquerdo está á' + valor + ' P S I.'
+            frase = 'ATENÇÃO, a pressão do pneu dianteiro esquerdo está á ' + valor + ' P S I.'
         elif nome == "rrTirePressure":
             alerts("Alerta de Pressão dos Pneus", "O pneu traseiro direito está á" + valor + "PSI.", nome)
-            frase = 'ATENÇÃO, a pressão do pneu traseiro direito está á' + valor + ' P S I.'
+            frase = 'ATENÇÃO, a pressão do pneu traseiro direito está á ' + valor + ' P S I.'
         elif nome == "rlTirePressure":
             alerts("Alerta de Pressão dos Pneus", "O pneu traseiro esquerdo está á" + valor + "PSI.", nome)
-            frase = 'ATENÇÃO, a pressão do pneu traseiro esquerdo está á' + valor + ' P S I.'
+            frase = 'ATENÇÃO, a pressão do pneu traseiro esquerdo está á ' + valor + ' P S I.'
         elif nome == "rfTireTemp":
             alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro direito está á" + valor + "°C.", nome)
-            frase = 'ATENÇÃO, a temperatura do pneu dianteiro direito está á' + valor + ' graus celcios.'
+            frase = 'ATENÇÃO, a temperatura do pneu dianteiro direito está á ' + valor + ' graus celcios.'
         elif nome == "lfTireTemp":
             alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro esquerdo está á" + valor + "°C.", nome)
-            frase = 'ATENÇÃO, a temperatura do pneu dianteiro esquerdo está á' + valor + ' graus celcios.'
+            frase = 'ATENÇÃO, a temperatura do pneu dianteiro esquerdo está á ' + valor + ' graus celcios.'
         elif nome == "rrTireTemp":
             alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro direito está á" + valor + "°C.", nome)
-            frase = 'ATENÇÃO, a temperatura do pneu traseiro direito está á' + valor + ' graus celcios.'
+            frase = 'ATENÇÃO, a temperatura do pneu traseiro direito está á ' + valor + ' graus celcios.'
         elif nome == "rlTireTemp":
             alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + valor + "°C.", nome)
-            frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á' + valor + ' graus celcios.'
+            frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á ' + valor + ' graus celcios.'
         engine.say(frase)
         engine.runAndWait()
-        return
+        return null
 
     def callback(ch, method, properties, body):
         data = json.loads(body)
