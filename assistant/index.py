@@ -31,9 +31,10 @@ def combustivel(fala):
 def oleoMotor(fala):
     if sensors('oil') is True:
         engine.say('A pressão do óleo está baixa, favor verificar! Algo mais?')
+        engine.runAndWait()
     else:
         engine.say('A pressão do óleo está ok! Algo mais?')
-    engine.runAndWait()
+        engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)     
     speech = r.recognize_google(audio, language='pt')
@@ -47,9 +48,10 @@ def oleoMotor(fala):
 def freio(fala):
     if sensors('brake') is True:
         engine.say('A pastilha de freio está desgastada, favor verificar! Algo mais')
+        engine.runAndWait()
     else:
         engine.say('A pastilha de freio está ok! Algo mais?')
-    engine.runAndWait()
+        engine.runAndWait()
     speech = 0
     audio = r.listen(s, 3, 7)     
     speech = r.recognize_google(audio, language='pt')
