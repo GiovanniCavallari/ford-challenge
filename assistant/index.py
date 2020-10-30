@@ -19,6 +19,7 @@ engine.setProperty('rate', speech_rate+63)  # aumenta em +65
 # Taxa de fala em palavras por minuto. O padrão é 200 palavras por minuto.
 
 def consumirFila():
+
     def alerts(title, desc, sensor):
         try:
             payload = {"title": title,"description": desc,"sensor": sensor,"notification": {"title": title,"body": desc}}
@@ -97,13 +98,10 @@ def consumirFila():
         data = json.loads(body)
         # Aparentemente a função recupera todos os valores como string.
         if format(data['error']) == 'True':
-            tratamento(format(data['name']), str(format(data['value'])))
-            # Quando tem erro pode retornar qualquer dado baseado na estrutura de exemplo abaixo
+            tratamento(format(data['name']), format(data['value']))
             #{"name": "fuel", "value": 80, "translation": "Combustível", "error": false, "carChassis": 123456, "solutions": [], "configurations": {"unit": "%", "value": "5", "active": true, "direction": "decreasing"}}
-        # Trata uma mensagem de cada vez no intervalo de 1 segundo
-        time.sleep(1)
-        # Realiza o manual_ack da 1 mensagen recebida
-        ch.basic_ack(delivery_tag=method.delivery_tag)
+        time.sleep(1)# Trata uma mensagem de cada vez no intervalo de 1 segundo
+        ch.basic_ack(delivery_tag=method.delivery_tag)# Realiza o manual_ack da 1 mensagen recebida
     connection = pika.BlockingConnection(pika.URLParameters('amqp://rabbitmq:rabbitmq@165.227.86.15:5672'))
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)  # Recupera 1 mensagens de cada vez
