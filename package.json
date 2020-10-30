@@ -7,7 +7,7 @@
     "build": "sucrase src/ -d build/ --transforms imports",
     "start": "node build/server.js",
     "start:queue": "node build/queue.js",
-    "start:seed": "cp ssrc/database/files/sensors-dataset.csv build/database/files/sensors-dataset.csv && node build/importCsv.js",
+    "start:seed": "cp src/database/files/sensors-dataset.csv build/database/files/sensors-dataset.csv && node build/importCsv.js",
     "dev:start": "nodemon src/server.js",
     "dev:queue": "nodemon src/queue.js",
     "db:run": "npm run migration:run && npm run seed:run",
