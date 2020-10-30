@@ -73,6 +73,133 @@ def temperatura(fala):
         engine.runAndWait()
         return speech
 
+def odometro(fala):
+
+    engine.say('O carro já rodou ' + str(sensors('odometer')) + ' quilometros. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+def TempPneuDD(fala):#Dianteiro direito
+
+    engine.say('O pneu dianteiro direito está á ' + str(sensors('rfTireTemp')) + ' graus celsius. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+def TempPneuED(fala):#Dianteiro esquerdo
+
+    engine.say('O pneu dianteiro esquerdo está á ' + str(sensors('lfTireTemp')) + ' graus celsius. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+def TempPneuDT(fala):#Traseiro direito
+
+    engine.say('O pneu traseiro direito está á ' + str(sensors('rrTireTemp')) + ' graus celsius. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+def TempPneuET(fala):#Traseiro esquerdo
+
+    engine.say('O pneu traseiro esquerdo está á ' + str(sensors('rlTireTemp')) + ' graus celsius. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+def PressPneuDD(fala):#Dianteiro direito
+
+    engine.say('O pneu dianteiro direito tem ' + str(sensors('rfTirePressure')) + ' P S I. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+def PressPneuED(fala):#Dianteiro esquerdo
+
+    engine.say('O pneu dianteiro esquerdo tem ' + str(sensors('lfTirePressure')) + ' P S I. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+def PressPneuDT(fala):#Traseiro direito
+
+    engine.say('O pneu traseiro direito tem ' + str(sensors('rrTirePressure')) + ' P S I. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+def PressPneuET(fala):#Traseiro esquerdo
+
+    engine.say('O pneu traseiro esquerdo tem ' + str(sensors('rlTirePressure')) + ' P S I. Deseja verificar mais alguma coisa?')
+    engine.runAndWait()
+    speech = 0
+    audio = r.listen(s, 3, 7)
+    speech = r.recognize_google(audio, language='pt')
+    if 'não' in speech:
+        # continuar = 0
+        speech = 0
+        engine.say('Ta bom, pode contar comigo sempre que precisar!')
+        engine.runAndWait()
+        return speech
+
+
 def sensors(req):
     sensor = requests.get(base+req).json()
     return sensor['value']
@@ -89,8 +216,8 @@ with sr.Microphone() as s:
             # try:      
                 # engine.say(oi)
                 # engine.runAndWait()  
-                audio = r.listen(s)     
-                speech = r.recognize_google(audio, language= 'pt')
+                audio = r.listen(s)
+                speech = r.recognize_google(audio, language='pt')
                 print(speech)
                 #continuar = 1
                 #loop para continuar após a primeira interação
@@ -101,12 +228,38 @@ with sr.Microphone() as s:
                 elif 'óleo' in speech:
                     oleoMotor(speech)
 
-                #elif 
                 elif 'freio' in speech:
                     freio(speech)
 
-                elif 'temperatura' in speech:
+                elif 'temperatura' in speech and 'motor' in speech:
                     temperatura(speech)
+
+                elif 'odometro' in speech:
+                    odometro(speech)
+
+                elif 'temperatura' in speech and 'pneu' in speech and 'direito' in speech and 'dianteiro' in speech:
+                    TempPneuDD(speech)
+
+                elif 'temperatura' in speech and 'pneu' in speech and 'direito' in speech and 'traseiro' in speech:
+                    TempPneuDT(speech)
+
+                elif 'temperatura' in speech and 'pneu' in speech and 'esquerdo' in speech and 'dianteiro' in speech:
+                    TempPneuED(speech)
+
+                elif 'temperatura' in speech and 'pneu' in speech and 'esquerdo' in speech and 'traseiro' in speech:
+                    TempPneuET(speech)
+
+                elif 'pressão' in speech and 'pneu' in speech and 'direito' in speech and 'dianteiro' in speech:
+                    PressPneuDD(speech)
+
+                elif 'pressão' in speech and 'pneu' in speech and 'direito' in speech and 'traseiro' in speech:
+                    PressPneuDT(speech)
+
+                elif 'pressão' in speech and 'pneu' in speech and 'esquerdo' in speech and 'dianteiro' in speech:
+                    PressPneuED(speech)
+
+                elif 'pressão' in speech and 'pneu' in speech and 'esquerdo' in speech and 'traseiro' in speech:
+                    PressPneuET(speech)
 
                 else:
                      #print('Não entendi. Pode repetir?')
