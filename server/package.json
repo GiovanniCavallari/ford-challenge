@@ -6,7 +6,8 @@
   "scripts": {
     "build": "sucrase src/ -d build/ --transforms imports",
     "start": "node build/server.js",
-    "start:queue": "cp src/database/files/sensors-dataset.csv build/database/files/sensors-dataset.csv && node build/importCsv.js && node build/queue.js",
+    "start:queue": "node build/queue.js",
+    "start:seed": "cp ssrc/database/files/sensors-dataset.csv build/database/files/sensors-dataset.csv && node build/importCsv.js",
     "dev:start": "nodemon src/server.js",
     "dev:debug": "nodemon --exec 'node --inspect -r sucrase/register src/server.js'",
     "dev:queue": "nodemon src/queue.js",
