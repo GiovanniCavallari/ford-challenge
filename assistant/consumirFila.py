@@ -1,11 +1,11 @@
-import pyttsx3
 import requests
 import pika
 import time
 import json
 import win32com.client as wincl
 
-speak = wincl.Dispatch("SAPI.SpVoice")
+windows_speak = wincl.Dispatch("SAPI.SpVoice")
+windows_speak.Rate = 3
 
 def consumirFila():
 
@@ -28,8 +28,8 @@ def consumirFila():
             alerts("Alerta de Óleo", "A pressão do óleo está baixa.", nome)
             frase = 'ATENÇÃO, a pressão do óleo está baixa.'
         elif nome == "brake":
-            alerts("Alerta de Freio", "A pastilha de freio está desgastada.", nome)
-            frase = 'ATENÇÃO, a pastilha de freio está muito desgastada.'
+            alerts("Alerta de Freio", "As pastilhas de freio estão desgastadas.", nome)
+            frase = 'ATENÇÃO, as pastilhas de freio estão muito desgastadas.'
         elif nome == "temperature":
             alerts("Alerta de Temperatura", "O motor está á " + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do motor está á ' + valor + ' graus celcios.'
@@ -57,8 +57,8 @@ def consumirFila():
         elif nome == "rlTireTemp":
             alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á ' + valor + ' graus celcios.'
-        speak.Rate = 1
-        speak.Speak(frase)
+        
+        windows_speak.Speak(frase)
         return
 
     def callback(ch, method, properties, body):
