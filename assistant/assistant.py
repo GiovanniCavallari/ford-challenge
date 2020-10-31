@@ -133,7 +133,7 @@ def interacao():
 
             elif 'dia' in fala or 'tarde' in fala or 'noite' in fala or 'tchau' in fala or 'não' in fala or 'nada' in fala:
                 windows_speak.Speak('Ok, precisando é só chamar! Até mais.')
-                
+
             else:
                 windows_speak.Speak('Não consegui entender!')
 
@@ -144,7 +144,7 @@ def interacao():
     while True:
         texto = get_audio()
         if 'Ford' in str(texto) or 'assistente' in str(texto):
-            playsound('abertura_mix.mp3')
+            playsound('./assets/abertura_mix.mp3')
             texto = get_audio()
             verifica(texto)
 

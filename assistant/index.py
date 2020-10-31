@@ -9,8 +9,8 @@
 
 # interacao()
 
-import threading
 import time
+import threading
 
 # This function gets called by our thread.. so it basically becomes the thread innit..                    
 def wait_for_event(e):
