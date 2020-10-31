@@ -11,3 +11,5 @@ threadConsumirFila.start()
 e.set()
 
 consumirFila(e)
+
+print('Running ford virtual assistant')
