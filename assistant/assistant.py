@@ -2,9 +2,10 @@ import requests
 import speech_recognition as sr
 import win32com.client as wincl
 from playsound import playsound
+from configs import speechConfig
 
 windows_speak = wincl.Dispatch("SAPI.SpVoice")
-windows_speak.Rate = 3
+windows_speak.Rate = speechConfig.getRate()
 
 sensores = ["combustível", "gasolina", "óleo", "freio", "freios", "temperatura",
             "motor", "pressão", "pneu", "dianteiro", "traseiro", "esquerdo", "dreito"]

@@ -1,11 +1,12 @@
-import requests
 import pika
 import time
 import json
+import requests
 import win32com.client as wincl
+from configs import speechConfig
 
 windows_speak = wincl.Dispatch("SAPI.SpVoice")
-windows_speak.Rate = 3
+windows_speak.Rate = speechConfig.getRate()
 
 def consumirFila():
 
@@ -87,7 +88,7 @@ def consumirFila():
     connection = pika.BlockingConnection(pika.URLParameters('amqp://rabbitmq:rabbitmq@165.227.86.15:5672'))
     
     channel = connection.channel()
-    channel.basic_qos(prefetch_count=1)  # Recupera 1 mensagens de cada vez
+    channel.basic_qos(prefetch_count=1)  # Recupera 1 mensagem por vez
     channel.queue_declare(queue='messages', durable=True)
     channel.basic_consume(queue='messages', on_message_callback=callback, auto_ack=False)
     channel.start_consuming()
