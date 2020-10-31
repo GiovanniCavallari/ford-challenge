@@ -11,7 +11,7 @@ sensores = ["combustível", "gasolina", "óleo", "freio", "freios", "temperatura
             "motor", "pressão", "pneu", "dianteiro", "traseiro", "esquerdo", "dreito"]
 
 
-def interacao():
+def interacao(e):
 
     def sensors(req):
         sensor = requests.get('https://fordva-aylrs.ondigitalocean.app/cars/123456/sensors/' + req).json()
@@ -144,6 +144,8 @@ def interacao():
             return
 
     while True:
+        e.wait() # Espera a flag ser True para executar as próximas linhas
+
         texto = get_audio()
         if 'Ford' in str(texto) or 'assistente' in str(texto):
             playsound('./assets/abertura_mix.mp3')

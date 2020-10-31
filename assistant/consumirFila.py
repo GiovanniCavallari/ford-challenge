@@ -9,7 +9,7 @@ windows_speak = wincl.Dispatch("SAPI.SpVoice")
 windows_speak.Rate = speechConfig.getRate()
 
 
-def consumirFila():
+def consumirFila(e):
 
     def alerts(title, desc, sensor):
         try:
@@ -75,15 +75,17 @@ def consumirFila():
         windows_speak.Speak(frase)
         return
 
-    def callback(ch, method, properties, body):
+    def callback(ch, method, properties, body, e):
         data = json.loads(body)
 
         # Aparentemente a função recupera todos os valores como string.
         if format(data['error']) == 'True':
+            e.clear() # Muda flag para False, impedindo a interação com a assistente
             tratamento(format(data['name']), format(data['value']))
 
         time.sleep(1) # Trata uma mensagem de cada vez no intervalo de 1 segundo
         ch.basic_ack(delivery_tag=method.delivery_tag) # Realiza o manual_ack da 1 mensagen recebida
+        e.set() # Muda flag para True, permitindo interagir com a assistente
 
 
     connection = pika.BlockingConnection(pika.URLParameters('amqp://rabbitmq:rabbitmq@165.227.86.15:5672'))
@@ -91,5 +93,5 @@ def consumirFila():
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)  # Recupera 1 mensagem por vez
     channel.queue_declare(queue='messages', durable=True)
-    channel.basic_consume(queue='messages', on_message_callback=callback, auto_ack=False)
+    channel.basic_consume(queue='messages', on_message_callback=callback, auto_ack=False, arguments=(e,))
     channel.start_consuming()
