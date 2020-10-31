@@ -75,7 +75,7 @@ def consumirFila(e):
         windows_speak.Speak(frase)
         return
 
-    def callback(ch, method, properties, body, e):
+    def callback(ch, method, properties, body):
         data = json.loads(body)
 
         # Aparentemente a função recupera todos os valores como string.
@@ -93,5 +93,5 @@ def consumirFila(e):
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)  # Recupera 1 mensagem por vez
     channel.queue_declare(queue='messages', durable=True)
-    channel.basic_consume(queue='messages', on_message_callback=callback, auto_ack=False, arguments=(e,))
+    channel.basic_consume(queue='messages', on_message_callback=callback, auto_ack=False)
     channel.start_consuming()
