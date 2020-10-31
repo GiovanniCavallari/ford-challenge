@@ -3,9 +3,9 @@ import requests
 import pika
 import time
 import json
-import os
+import win32com.client as wincl
 
-
+speak = wincl.Dispatch("SAPI.SpVoice")
 engine = pyttsx3.init()  # inicia a engine da lib
 # br_voz_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_PT-BR_MARIA_11.0'
 # engine.setProperty('voice', br_voz_id)
@@ -16,9 +16,9 @@ def consumirFila():
 
     def alerts(title, desc, sensor):
         try:
-            #print(title, desc, sensor)
-            payload = {"title": title,"description": desc,"sensor": sensor,"notification": {"title": title,"body": desc}}
-            requests.post('https://fordva-aylrs.ondigitalocean.app/cars/123456/alerts', json=payload)
+            print(title, desc, sensor)
+            # payload = {"title": title,"description": desc,"sensor": sensor,"notification": {"title": title,"body": desc}}
+            # requests.post('https://fordva-aylrs.ondigitalocean.app/cars/123456/alerts', json=payload)
         except ValueError:
             print("Erro ao enviar alerta para API")
 
@@ -63,7 +63,7 @@ def consumirFila():
             alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á ' + valor + ' graus celcios.'
         
-        os.system('say ' + frase)
+        speak.Speak(frase)
         return
 
     def callback(ch, method, properties, body):
