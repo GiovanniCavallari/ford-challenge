@@ -21,6 +21,7 @@ async function getSensorsByCarChassis(chassis) {
     const sensors = await Sensor.findAll({
       attributes,
       where: { carChassis: chassis },
+      order: [['id', 'ASC']],
       limit: 1,
     });
     return sensors;
@@ -34,8 +35,9 @@ async function getAllSensors(page = 1) {
 
   try {
     const sensors = await Sensor.findAll({
-      attributes,
+      attributes: [...attributes, 'carChassis'],
       offset,
+      order: [['id', 'ASC']],
       limit: 1,
     });
     return sensors;
@@ -49,6 +51,7 @@ async function getSensorsByName(name, chassis) {
     const sensors = await Sensor.findOne({
       attributes: [name],
       where: { carChassis: chassis },
+      order: [['id', 'ASC']],
     });
     return sensors;
   } catch (error) {
