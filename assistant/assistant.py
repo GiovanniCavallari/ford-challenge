@@ -106,7 +106,7 @@ def interacao(e):
             elif 'temperatura' in fala and 'motor' in fala:
                 windows_speak.Speak('O motor esta à ' + str(sensors('temperature')) + ' graus celsius.')
 
-            elif 'odometro' in fala or 'andei' in fala:
+            elif 'odometro' in fala or 'andei' in fala or 'rodei' in fala:
                 windows_speak.Speak('O carro já rodou ' + str(sensors('odometer')) + ' quilometros.')
 
             elif 'temperatura' in fala and 'pneu' in fala and 'direito' in fala and 'dianteiro' in fala:
