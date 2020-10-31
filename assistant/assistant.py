@@ -39,15 +39,15 @@ def interacao(e):
 
             if 'óleo' in fala:
                 if sensors('oil'):
-                    windows_speak.Speak('A pressão do óleo está baixa, favor verificar!')
-                else:
                     windows_speak.Speak('A pressão do óleo ok!')
+                else:
+                    windows_speak.Speak('A pressão do óleo está baixa, favor verificar!')
 
             if 'freio' in fala or 'freios' in fala:
                 if sensors('brake'):
-                    windows_speak.Speak('A pastilha de freio está muito desgastada, favor verificar!')
-                else:
                     windows_speak.Speak('A pastilha de freio está ok!')
+                else:
+                    windows_speak.Speak('A pastilha de freio está muito desgastada, favor verificar!')
 
             if 'temperatura' in fala and 'motor' in fala:
                 windows_speak.Speak('O motor esta à ' + str(sensors('temperature')) + ' graus celsius.')
@@ -93,15 +93,15 @@ def interacao(e):
 
             elif 'óleo' in fala:
                 if sensors('oil'):
-                    windows_speak.Speak('A pressão do óleo está baixa, favor verificar!')
-                else:
                     windows_speak.Speak('A pressão do óleo ok!')
+                else:
+                    windows_speak.Speak('A pressão do óleo está baixa, favor verificar!')
 
             elif 'freio' in fala or 'freios' in fala:
                 if sensors('brake'):
-                    windows_speak.Speak('A pastilha de freio está muito desgastada, favor verificar!')
-                else:
                     windows_speak.Speak('A pastilha de freio está ok!')
+                else:
+                    windows_speak.Speak('A pastilha de freio está muito desgastada, favor verificar!')
 
             elif 'temperatura' in fala and 'motor' in fala:
                 windows_speak.Speak('O motor esta à ' + str(sensors('temperature')) + ' graus celsius.')
@@ -136,6 +136,9 @@ def interacao(e):
             elif 'dia' in fala or 'tarde' in fala or 'noite' in fala or 'tchau' in fala or 'não' in fala or 'nada' in fala:
                 windows_speak.Speak('Ok, precisando é só chamar! Até mais.')
 
+            elif 'você' in fala or 'quem' in fala:
+                windows_speak.Speak('Olá, eu sou eu')
+
             else:
                 windows_speak.Speak('Não consegui entender!')
 
@@ -145,7 +148,6 @@ def interacao(e):
 
     while True:
         e.wait() # Espera a flag ser True para executar as próximas linhas
-
         texto = get_audio()
         if 'Ford' in str(texto) or 'assistente' in str(texto):
             playsound('./assets/abertura_mix.mp3')
