@@ -2,9 +2,9 @@ import pika
 import time
 import json
 import requests
+import numpy as np
 import win32com.client as wincl
 from configs import speechConfig
-import numpy as np
 
 windows_speak = wincl.Dispatch("SAPI.SpVoice")
 windows_speak.Rate = speechConfig.getRate()
@@ -14,7 +14,7 @@ def consumirFila(e):
 
     def alerts(title, desc, sensor):
         try:
-            #print(title, desc, sensor)
+            # print(title, desc, sensor)
              payload = {"title": title,"description": desc,"sensor": sensor,"notification": {"title": title,"body": desc}}
              requests.post('https://fordva-aylrs.ondigitalocean.app/cars/123456/alerts', json=payload)
         except ValueError:
@@ -81,6 +81,7 @@ def consumirFila(e):
         for solution in solutions:
             windows_speak.Speak(solution)
             time.sleep(0.1)
+        
         windows_speak.Speak('Para mais informações contate a central de atendimento.')
         return
 
