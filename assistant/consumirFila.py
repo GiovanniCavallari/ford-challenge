@@ -6,11 +6,6 @@ import json
 import win32com.client as wincl
 
 speak = wincl.Dispatch("SAPI.SpVoice")
-engine = pyttsx3.init()  # inicia a engine da lib
-# br_voz_id = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_PT-BR_MARIA_11.0'
-# engine.setProperty('voice', br_voz_id)
-speech_rate = engine.getProperty('rate')
-engine.setProperty('rate', speech_rate+63)
 
 def consumirFila():
 
@@ -62,7 +57,7 @@ def consumirFila():
         elif nome == "rlTireTemp":
             alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á ' + valor + ' graus celcios.'
-        
+        speak.Rate = 1
         speak.Speak(frase)
         return
 
