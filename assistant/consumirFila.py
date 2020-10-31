@@ -8,6 +8,7 @@ from configs import speechConfig
 windows_speak = wincl.Dispatch("SAPI.SpVoice")
 windows_speak.Rate = speechConfig.getRate()
 
+
 def consumirFila():
 
     def alerts(title, desc, sensor):

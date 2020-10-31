@@ -12,6 +12,7 @@ sensores = ["combustível", "gasolina", "óleo", "freio", "freios", "temperatura
 
 
 def interacao():
+
     def sensors(req):
         sensor = requests.get('https://fordva-aylrs.ondigitalocean.app/cars/123456/sensors/' + req).json()
         return sensor['value']
@@ -148,6 +149,3 @@ def interacao():
             playsound('./assets/abertura_mix.mp3')
             texto = get_audio()
             verifica(texto)
-
-
-interacao()
