@@ -49,10 +49,10 @@ def interacao(e):
                 else:
                     windows_speak.Speak('A pastilha de freio está muito desgastada, favor verificar!')
 
-            if 'temperatura' in fala and 'motor' in fala:
-                windows_speak.Speak('O motor esta à ' + str(sensors('temperature')) + ' graus celsius.')
+            if ('temperatura' in fala and 'motor' in fala) or ('temperatura' in fala and 'líquido' in fala):
+                windows_speak.Speak('O líquido de arrefecimento esta à ' + str(sensors('temperature')) + ' graus celsius.')
 
-            if 'odometro' in fala or 'andei' in fala:
+            if 'odometro' in fala or 'andei' in fala or 'rodei' in fala:
                 windows_speak.Speak('O carro já rodou ' + str(sensors('odometer')) + ' quilometros.')
 
             if 'temperatura' in fala and 'pneu' in fala and 'direito' in fala and 'dianteiro' in fala:
@@ -79,7 +79,9 @@ def interacao(e):
             if 'pressão' in fala and 'pneu' in fala and 'esquerdo' in fala and 'traseiro' in fala:
                 windows_speak.Speak('O pneu traseiro esquerdo tem ' + str(sensors('rlTirePressure')) + ' P S I.')
         else:
-            windows_speak.Speak('Não consegui entender!')
+            windows_speak.Speak('Não consegui entender! Repita por favor.')
+            playsound('./assets/abertura_mix.mp3')
+            return verifica(get_audio())
 
         return
 
@@ -103,8 +105,8 @@ def interacao(e):
                 else:
                     windows_speak.Speak('A pastilha de freio está muito desgastada, favor verificar!')
 
-            elif 'temperatura' in fala and 'motor' in fala:
-                windows_speak.Speak('O motor esta à ' + str(sensors('temperature')) + ' graus celsius.')
+            elif ('temperatura' in fala and 'motor' in fala) or ('temperatura' in fala and 'líquido' in fala):
+                windows_speak.Speak('O líquido de arrefecimento esta à ' + str(sensors('temperature')) + ' graus celsius.')
 
             elif 'odometro' in fala or 'andei' in fala or 'rodei' in fala:
                 windows_speak.Speak('O carro já rodou ' + str(sensors('odometer')) + ' quilometros.')
@@ -137,10 +139,12 @@ def interacao(e):
                 windows_speak.Speak('Ok, precisando é só chamar! Até mais.')
 
             elif 'você' in fala or 'quem' in fala:
-                windows_speak.Speak('Olá, eu sou eu')
+                windows_speak.Speak('Olá, eu sou sua assistente virtual. Meu objetivo é estar sempre pronta para responder á suas duvidas e te avisar sobre o estao do carro.')
 
             else:
-                windows_speak.Speak('Não consegui entender!')
+                windows_speak.Speak('Não consegui entender! Repita por favor.')
+                playsound('./assets/abertura_mix.mp3')
+                return verifica(get_audio())
 
             return
         except:
