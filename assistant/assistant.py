@@ -24,7 +24,7 @@ def interacao(e):
         
         with sr.Microphone() as source:
             r.adjust_for_ambient_noise(source, duration=0.5)
-            audio = r.listen(source)
+            audio = r.listen(source, phrase_time_limit=5)
             try:
                 said = r.recognize_google(audio, language='pt')
                 print(said)
