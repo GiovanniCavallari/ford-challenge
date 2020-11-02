@@ -7,7 +7,7 @@ from configs import speechConfig
 windows_speak = wincl.Dispatch("SAPI.SpVoice")
 windows_speak.Rate = speechConfig.getRate()
 
-sensores = ["combustível", "gasolina", "óleo", "freio", "freios", "temperatura",
+sensores = ["combustível", "gasolina", "óleo", "freio", "freios", "temperatura", "odometro","andei", "rodei",
             "motor", "pressão", "pneu", "dianteiro", "traseiro", "esquerdo", "direito"]
 
 
