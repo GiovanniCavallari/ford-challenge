@@ -8,7 +8,7 @@ windows_speak = wincl.Dispatch("SAPI.SpVoice")
 windows_speak.Rate = speechConfig.getRate()
 
 sensores = ["combustível", "gasolina", "óleo", "freio", "freios", "temperatura",
-            "motor", "pressão", "pneu", "dianteiro", "traseiro", "esquerdo", "dreito"]
+            "motor", "pressão", "pneu", "dianteiro", "traseiro", "esquerdo", "direito"]
 
 
 def interacao(e):
