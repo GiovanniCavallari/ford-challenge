@@ -6,7 +6,7 @@ async function update(request, response) {
   const { active, value } = request.body;
 
   if (typeof active !== 'boolean' || (value && typeof value !== 'number')) {
-    const message = 'Invalid type for "active" or "value"';
+    const message = 'Invalid type for active or value';
     return errorResponse(response, 400, message);
   }
 

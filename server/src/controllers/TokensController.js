@@ -33,7 +33,7 @@ async function create(request, response) {
   const { token } = request.body;
 
   if (typeof token !== 'string') {
-    const message = 'Invalid type for "token"';
+    const message = 'Invalid type for token';
     return errorResponse(response, 400, message);
   }
 

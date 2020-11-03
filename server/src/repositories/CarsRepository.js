@@ -10,12 +10,13 @@ async function getCarByChassis(chassis) {
           model: Sensor,
           as: 'sensors',
           attributes: { exclude: ['id', 'carChassis', 'createdAt', 'updatedAt'] },
+          order: [['id', 'ASC']],
+          limit: 1,
         },
       ],
     });
     return car;
   } catch (error) {
-    console.log(error);
     return false;
   }
 }

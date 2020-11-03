@@ -43,7 +43,12 @@ const Reviews: React.FC = () => {
         <Content refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
           <Main>
             {items.map((item) => (
-              <Card key={String(item.id)} title={item.type} footer={`Data da revisão: ${item.date}`}>
+              <Card
+                key={String(item.id)}
+                title={item.type}
+                footer={`Data da revisão: ${item.date}`}
+                labels={false}
+              >
                 {item.description}
               </Card>
             ))}

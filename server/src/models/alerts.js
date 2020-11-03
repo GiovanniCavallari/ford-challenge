@@ -5,11 +5,17 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    type: {
+    title: {
       type: DataTypes.STRING,
     },
     description: {
       type: DataTypes.STRING,
+    },
+    sensor: {
+      type: DataTypes.STRING,
+    },
+    opened: {
+      type: DataTypes.BOOLEAN,
     },
     carChassis: {
       type: DataTypes.INTEGER,

@@ -1,16 +1,41 @@
 import React from 'react';
 
-import { Container, Header, Title, Body, BodyContent, Footer, FooterContent } from './styled';
+import Label from '../Label';
+
+import {
+  TouchableContainer,
+  NonTouchableContainer,
+  Header,
+  Title,
+  Body,
+  BodyContent,
+  Footer,
+  FooterContent,
+  LabelsContainer,
+} from './styled';
 
 interface Props {
+  id?: number;
   title: string;
   footer: string;
+  labels: boolean;
+  sensor?: string;
   footerAlign?: 'left' | 'right';
+  notification?: boolean;
+  onPress?: () => void;
 }
 
-const Card: React.FC<Props> = ({ title, children, footer, footerAlign }) => {
-  return (
-    <Container>
+const Card: React.FC<Props> = ({ id, title, children, footer, labels, sensor, footerAlign, notification, onPress }) => {
+  const component = () => (
+    <>
+      {labels && (
+        <LabelsContainer>
+          {!notification && <Label notification={true}>Novo</Label>}
+          <Label notification={false}>#{id}</Label>
+          <Label notification={false}>{sensor}</Label>
+        </LabelsContainer>
+      )}
+
       <Header>
         <Title>{title}</Title>
       </Header>
@@ -22,7 +47,13 @@ const Card: React.FC<Props> = ({ title, children, footer, footerAlign }) => {
       <Footer>
         <FooterContent align={footerAlign}>{footer}</FooterContent>
       </Footer>
-    </Container>
+    </>
+  );
+
+  return onPress ? (
+    <TouchableContainer onPress={onPress}>{component()}</TouchableContainer>
+  ) : (
+    <NonTouchableContainer>{component()}</NonTouchableContainer>
   );
 };
 

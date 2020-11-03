@@ -3,6 +3,7 @@ export default {
     size: {
       small: 11,
       normal: 12,
+      semiregular: 13,
       regular: 14,
       medium: 15,
       large: 18,
@@ -27,6 +28,7 @@ export default {
     black: 'rgba(0, 0, 0, 0.72)',
     error: 'rgba(200, 0, 0, 0.80)',
     gray: '#7E8392',
+    lightestgray: '#E0DEDE',
     lightgray: '#F4F3F4',
     mediumgray: '#DDDDDD',
     darkgray: '#656565',
@@ -34,5 +36,8 @@ export default {
     lightblue: '#CBE0FA',
     mediumblue: '#68BCE1',
     darkblue: '#006DA7',
+    yellow: '#FBC400',
+    labelText: '#747474',
+    subtitle: '#6F7B81',
   }
 }

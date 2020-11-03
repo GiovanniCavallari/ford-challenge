@@ -7,20 +7,31 @@ import Car from './screens/Car';
 import Reviews from './screens/Reviews';
 import Alerts from './screens/Alerts';
 import Sensor from './screens/Sensor';
+import AlertDetails from './screens/AlertDetails';
 
 import { VehicleIcon, ReviewsIcon, AlertsIcon } from './assets/styles/icons';
 import theme from './assets/styles/theme';
 
 const CarStack = createStackNavigator();
+const AlertsStack = createStackNavigator();
 const TabNavigation = createBottomTabNavigator();
 
 const Routes: React.FC = () => {
   function CarStackScreen() {
     return (
       <CarStack.Navigator>
-        <CarStack.Screen name="Automóvel" component={Car} options={{ headerShown: false }} />
+        <CarStack.Screen name="Automovel" component={Car} options={{ headerShown: false }} />
         <CarStack.Screen name="Sensor" component={Sensor} options={{ headerShown: false }} />
       </CarStack.Navigator>
+    );
+  }
+
+  function AlertsStackScreen() {
+    return (
+      <AlertsStack.Navigator>
+        <AlertsStack.Screen name="Alertas" component={Alerts} options={{ headerShown: false }} />
+        <AlertsStack.Screen name="DetalhesAlerta" component={AlertDetails} options={{ headerShown: false }} />
+      </AlertsStack.Navigator>
     );
   }
 
@@ -69,7 +80,7 @@ const Routes: React.FC = () => {
 
         <TabNavigation.Screen
           name="Alertas"
-          component={Alerts}
+          component={AlertsStackScreen}
           options={{
             tabBarIcon: ({ focused }) => <AlertsIcon focused={focused} />,
           }}

@@ -1,15 +1,11 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Alerts', {
+    return queryInterface.createTable('Solutions', {
       id: {
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
         type: Sequelize.INTEGER,
-      },
-      title: {
-        allowNull: false,
-        type: Sequelize.STRING,
       },
       description: {
         allowNull: false,
@@ -19,11 +15,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      opened: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -32,21 +23,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      carChassis: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-        references: {
-          model: 'Cars',
-          key: 'chassis',
-          as: 'carChassis',
-        },
-      },
     });
   },
 
   down: async (queryInterface) => {
-    return queryInterface.dropTable('Alerts');
+    return queryInterface.dropTable('Solutions');
   },
 };

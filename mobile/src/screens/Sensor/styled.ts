@@ -1,5 +1,6 @@
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
+import HrDivider from '../../components/Divider';
 
 import theme from '../../assets/styles/theme';
 
@@ -52,12 +53,7 @@ export const Configurations = styled.View`
   padding: 25px;
 `;
 
-export const Divider = styled.View<{ marginTop: boolean }>`
-  margin: 24px 0px;
-  margin-top: ${(props) => (props.marginTop ? 24 : 0)}px;
-  border-bottom-color: ${theme.colors.mediumgray};
-  border-bottom-width: 1px;
-`;
+export const Divider = styled(HrDivider)``;
 
 export const Title = styled.Text`
   color: ${theme.colors.primary};

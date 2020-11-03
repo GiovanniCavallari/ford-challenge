@@ -11,7 +11,7 @@ export const Container = styled.View`
   align-items: center;
   justify-content: flex-start;
 
-  padding: 25px;
+  padding: 20px 25px 25px;
   padding-top: ${20 + statusBarHeight}px;
   background: ${theme.colors.primary};
 `;
