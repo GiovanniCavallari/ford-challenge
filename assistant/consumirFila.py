@@ -94,7 +94,6 @@ def consumirFila(e):
             tratamento(format(data['name']), format(data['value']))
             speak_solutions(np.array(data['solutions']))
 
-
         time.sleep(1) # Trata uma mensagem de cada vez no intervalo de 1 segundo
         ch.basic_ack(delivery_tag=method.delivery_tag) # Realiza o manual_ack da 1 mensagen recebida
         e.set() # Muda flag para True, permitindo interagir com a assistente
