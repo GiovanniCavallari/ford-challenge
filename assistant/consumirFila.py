@@ -72,7 +72,7 @@ def consumirFila(e):
         elif nome == "rlTireTemp":
             alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á ' + valor + ' graus celsius.'
-            
+
         windows_speak.Speak(frase)
         return
 
