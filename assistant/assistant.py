@@ -139,7 +139,7 @@ def interacao(e):
                 windows_speak.Speak('Ok, precisando é só chamar! Até mais.')
 
             elif 'você' in fala or 'quem' in fala:
-                windows_speak.Speak('Olá, eu sou sua assistente virtual. Meu objetivo é estar sempre pronta para responder á suas duvidas e te avisar sobre o estado do carro.')
+                windows_speak.Speak('Olá, eu sou sua assistente virtual. Meu objetivo é estar sempre pronta para responder á suas duvidas e te avisar sobre o estado do seu veículo.')
 
             else:
                 windows_speak.Speak('Não consegui entender! Você pode repetir por favor?')
