@@ -56,7 +56,6 @@ export const PossibleSolutions = styled.View`
 
 export const ListItem = styled.View`
   flex-direction: row;
-  justify-content: center;
   align-items: center;
   margin-top: 8px;
 `;
