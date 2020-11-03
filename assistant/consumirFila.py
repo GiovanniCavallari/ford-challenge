@@ -42,35 +42,35 @@ def consumirFila(e):
             frase = 'ATENÇÃO, a temperatura do motor está á ' + valor + ' graus celsius.'
 
         elif nome == "rfTirePressure":
-            alerts("Alerta de Pressão dos Pneus", "O pneu dianteiro direito está á" + valor + "PSI.", nome)
+            alerts("Alerta de Pressão dos Pneus", "O pneu dianteiro direito está á " + valor + " PSI.", nome)
             frase = 'ATENÇÃO, a pressão do pneu dianteiro direito está á ' + valor + ' P S I.'
             
         elif nome == "lfTirePressure":
-            alerts("Alerta de Pressão dos Pneus", "O pneu esquerdo direito está á" + valor + "PSI.", nome)
+            alerts("Alerta de Pressão dos Pneus", "O pneu esquerdo direito está á " + valor + " PSI.", nome)
             frase = 'ATENÇÃO, a pressão do pneu dianteiro esquerdo está á ' + valor + ' P S I.'
             
         elif nome == "rrTirePressure":
-            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro direito está á" + valor + "PSI.", nome)
+            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro direito está á " + valor + " PSI.", nome)
             frase = 'ATENÇÃO, a pressão do pneu traseiro direito está á ' + valor + ' P S I.'
             
         elif nome == "rlTirePressure":
-            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro esquerdo está á" + valor + "PSI.", nome)
+            alerts("Alerta de Pressão dos Pneus", "O pneu traseiro esquerdo está á " + valor + " PSI.", nome)
             frase = 'ATENÇÃO, a pressão do pneu traseiro esquerdo está á ' + valor + ' P S I.'
             
         elif nome == "rfTireTemp":
-            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro direito está á" + valor + "°C.", nome)
+            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro direito está á " + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu dianteiro direito está á ' + valor + ' graus celsius.'
             
         elif nome == "lfTireTemp":
-            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro esquerdo está á" + valor + "°C.", nome)
+            alerts("Alerta de Temperatura dos Pneus", "O pneu dianteiro esquerdo está á " + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu dianteiro esquerdo está á ' + valor + ' graus celsius.'
             
         elif nome == "rrTireTemp":
-            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro direito está á" + valor + "°C.", nome)
+            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro direito está á " + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu traseiro direito está á ' + valor + ' graus celsius.'
             
         elif nome == "rlTireTemp":
-            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á" + valor + "°C.", nome)
+            alerts("Alerta de Temperatura dos Pneus", "O pneu traseiro esquerdo está á " + valor + "°C.", nome)
             frase = 'ATENÇÃO, a temperatura do pneu traseiro esquerdo está á ' + valor + ' graus celsius.'
 
         windows_speak.Speak(frase)
