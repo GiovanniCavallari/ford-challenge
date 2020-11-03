@@ -81,7 +81,7 @@ def consumirFila(e):
         for solution in solutions:
             e.clear() # Muda flag para False, impedindo a interação com a assistente
             windows_speak.Speak(solution)
-            time.sleep(0.1)
+            time.sleep(0.5)
         
         windows_speak.Speak('Para mais informações, entre em contato com o suporte Ford.')
         return
