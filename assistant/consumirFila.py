@@ -82,7 +82,7 @@ def consumirFila(e):
             windows_speak.Speak(solution)
             time.sleep(0.1)
         
-        windows_speak.Speak('Para mais informações contate a central de atendimento.')
+        windows_speak.Speak('Para mais informações, entre em contato com o suporte Ford.')
         return
 
     def callback(ch, method, properties, body):
