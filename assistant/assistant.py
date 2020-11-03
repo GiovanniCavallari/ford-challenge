@@ -142,7 +142,7 @@ def interacao(e):
                 windows_speak.Speak('Olá, eu sou sua assistente virtual. Meu objetivo é estar sempre pronta para responder á suas duvidas e te avisar sobre o estado do carro.')
 
             else:
-                windows_speak.Speak('Não consegui entender! Repita por favor.')
+                windows_speak.Speak('Não consegui entender! Você pode repetir por favor?')
                 playsound('./assets/abertura_mix.mp3')
                 return verifica(get_audio())
 
