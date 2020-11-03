@@ -27,7 +27,7 @@ def interacao(e):
             audio = r.listen(source, phrase_time_limit=5)
             try:
                 said = r.recognize_google(audio, language='pt')
-                print(said)
+                
                 return said
             except:
                 pass
