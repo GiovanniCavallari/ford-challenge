@@ -10,6 +10,6 @@ threadConsumirFila.daemon = True
 threadConsumirFila.start()
 e.set()
 
-consumirFila(e)
+print('Running Ford virtual assistant')
 
-print('Running ford virtual assistant')
+consumirFila(e)
