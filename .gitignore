@@ -104,6 +104,7 @@ dist
 # TernJS port file
 .tern-port
 
+# expo
 .expo/*
 npm-debug.*
 *.jks
@@ -116,3 +117,8 @@ web-build/
 
 # macOS
 .DS_Store
+
+# Pythoon
+__pycache__/
+*.py[cod]
+*$py.class
