@@ -79,6 +79,7 @@ def consumirFila(e):
     def speak_solutions(solutions):
         windows_speak.Speak('Possiveis soluções: ')
         for solution in solutions:
+            e.clear() # Muda flag para False, impedindo a interação com a assistente
             windows_speak.Speak(solution)
             time.sleep(0.1)
         
