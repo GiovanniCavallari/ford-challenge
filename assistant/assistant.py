@@ -39,7 +39,7 @@ def interacao(e):
 
             if 'óleo' in fala:
                 if sensors('oil'):
-                    windows_speak.Speak('A pressão do óleo ok!')
+                    windows_speak.Speak('A pressão do óleo está ok!')
                 else:
                     windows_speak.Speak('A pressão do óleo está baixa, favor verificar!')
 
@@ -56,16 +56,16 @@ def interacao(e):
                 windows_speak.Speak('O carro já rodou ' + str(sensors('odometer')) + ' quilometros.')
 
             if 'temperatura' in fala and 'pneu' in fala and 'direito' in fala and 'dianteiro' in fala:
-                windows_speak.Speak('O pneu dianteiro direito está á ' + str(sensors('rfTireTemp')) + ' graus celsius.')
+                windows_speak.Speak('O pneu dianteiro direito está à ' + str(sensors('rfTireTemp')) + ' graus celsius.')
 
             if 'temperatura' in fala and 'pneu' in fala and 'direito' in fala and 'traseiro' in fala:
-                windows_speak.Speak('O pneu traseiro direito está á ' + str(sensors('rrTireTemp')) + ' graus celsius.')
+                windows_speak.Speak('O pneu traseiro direito está à ' + str(sensors('rrTireTemp')) + ' graus celsius.')
 
             if 'temperatura' in fala and 'pneu' in fala and 'esquerdo' in fala and 'dianteiro' in fala:
-                windows_speak.Speak('O pneu dianteiro esquerdo está á ' + str(sensors('lfTireTemp')) + ' graus celsius.')
+                windows_speak.Speak('O pneu dianteiro esquerdo está à ' + str(sensors('lfTireTemp')) + ' graus celsius.')
 
             if 'temperatura' in fala and 'pneu' in fala and 'esquerdo' in fala and 'traseiro' in fala:
-                windows_speak.Speak('O pneu traseiro esquerdo está á ' + str(sensors('rlTireTemp')) + ' graus celsius.')
+                windows_speak.Speak('O pneu traseiro esquerdo está à ' + str(sensors('rlTireTemp')) + ' graus celsius.')
 
             if 'pressão' in fala and 'pneu' in fala and 'direito' in fala and 'dianteiro' in fala:
                 windows_speak.Speak('O pneu dianteiro direito tem ' + str(sensors('rfTirePressure')) + ' P S I.')
@@ -79,7 +79,7 @@ def interacao(e):
             if 'pressão' in fala and 'pneu' in fala and 'esquerdo' in fala and 'traseiro' in fala:
                 windows_speak.Speak('O pneu traseiro esquerdo tem ' + str(sensors('rlTirePressure')) + ' P S I.')
         else:
-            windows_speak.Speak('Não consegui entender! Repita por favor.')
+            windows_speak.Speak('Não consegui entender! Você pode repetir por favor?')
             playsound('./assets/abertura_mix.mp3')
             return verifica(get_audio())
 
