@@ -24,3 +24,4 @@ A solução contemplou:
 
 ### Architecture
 
+![Fordina architecture](https://raw.githubusercontent.com/GiovanniCavallari/ford-challenge/master/docs/architecture.png)
