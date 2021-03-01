@@ -2,15 +2,15 @@
 
 ## About the project
 
-Challenge da FORD realizado com as turmas de 3° ano de Engenharia de Computação da FIAP:
+FORD Challenge in partnership with FIAP's 3rd year Computer Engineering classes:
 
-O desafio proposto foi desenvolver aplicações para solucionar problemas e transformar a experiência de Mobilidade Urbana e de CX da empresa e de seus consumidores, por meio de novas tecnologias.
+The proposed challenge was to develop applications to solve problems and transform the experience of Urban Mobility and CX of the company and its consumers, through new technologies.
 
-A solução contemplou:
-- Desenvolvimento uma Assistente Virtual integrada a central multimídia do veículo;
-- Desenvolvimento de APP para visualização das informações do veículo e configuração da Assistente Virtual;
-- Desenvolvimento de API REST para integrar o APP e a Assistente Virtual;
-- Implementação de um serviço de fila (RabbitMQ) para disparar eventos de Push Notification no APP e alertas para a Assistente Virtual;
+The solution included:
+- Development of a Virtual Assistant integrated with the vehicle's central multimedia;
+- APP development to show vehicle information and configution of Virtual Assistant;
+- Development of REST API to integrate the APP and the Virtual Assistant;
+- Implementation of a queue service (RabbitMQ) to trigger Push Notification events in the APP and alerts for a Virtual Assistant;
 
 ### Built with 
 
