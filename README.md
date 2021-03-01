@@ -8,7 +8,7 @@ The proposed challenge was to develop applications to solve problems and transfo
 
 The solution included:
 - Development of a Virtual Assistant integrated with the vehicle's central multimedia;
-- APP development to show vehicle information and configution of Virtual Assistant;
+- APP development to show vehicle information and configuration of Virtual Assistant;
 - Development of REST API to integrate the APP and the Virtual Assistant;
 - Implementation of a queue service (RabbitMQ) to trigger Push Notification events in the APP and alerts for a Virtual Assistant;
 
